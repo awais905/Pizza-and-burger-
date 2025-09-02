@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - South Punjab Spice Delight</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #8B0000;
+            --secondary: #FF8C00;
+            --accent: #B22222;
+            --dark: #2C1E1E;
+            --light: #FFF5F5;
+            --gold: #FFD700;
+            --text: #FFF;
+            --success: #27ae60;
+        }
+
+        body {
+            background-color: #2C1E1E;
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--gold);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-btn {
+            background: linear-gradient(to bottom, var(--gold), #daa520);
+            color: var(--dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .lang-btn i {
+            font-size: 1.2rem;
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            min-width: 160px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .lang-dropdown a {
+            color: var(--dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        .lang-dropdown a:hover {
+            background: var(--light);
+        }
+
+        .language-selector:hover .lang-dropdown {
+            display: block;
+        }
+
+        /* Hero Section */
+        .menu-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .menu-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .menu-hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .menu-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Menu Categories */
+        .menu-categories {
+            padding: 60px 0;
+            background: var(--dark);
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .category-tab {
+            background: rgba(139, 0, 0, 0.3);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab.active {
+            background: var(--primary);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-tab:hover {
+            background: var(--primary);
+        }
+
+        /* Menu Items */
+        .menu-items {
+            padding: 40px 0;
+        }
+
+        .category-section {
+            display: none;
+        }
+
+        .category-section.active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-title p {
+            color: #ccc;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-card {
+            background: rgba(139, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .menu-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card:hover .menu-img img {
+            transform: scale(1.1);
+        }
+
+        .menu-content {
+            padding: 20px;
+        }
+
+        .menu-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .menu-content p {
+            color: #ccc;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .menu-price {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            border-top: 2px solid var(--primary);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-column p, .footer-column li {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .menu-hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .menu-grid, .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-utensils logo-icon"></i>
+                    <h1>South Punjab <span>Spice Delight</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html" class="active">Menu</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <button class="lang-btn">
+                        <i class="fas fa-globe"></i> <span id="current-lang">English</span>
+                    </button>
+                    <div class="lang-dropdown">
+                        <a href="#" onclick="changeLanguage('english')">English</a>
+                        <a href="#" onclick="changeLanguage('urdu')">Urdu</a>
+                        <a href="#" onclick="changeLanguage('saraiki')">Saraiki</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="menu-hero">
+        <div class="container">
+            <div class="menu-hero-content">
+                <h2 id="menu-hero-title">Our Delicious Menu</h2>
+                <p id="menu-hero-text">Explore our wide variety of pizzas, burgers, and fast food made with the finest ingredients and authentic South Punjab spices.</p>
+                <div class="hero-buttons">
+                    <a href="#pizza" class="btn" id="order-btn">Order Now</a>
+                    <a href="index.html" class="btn btn-outline" id="home-btn">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Categories -->
+    <section class="menu-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="pizza">Pizza</button>
+                <button class="category-tab" data-category="burgers">Burgers</button>
+                <button class="category-tab" data-category="fastfood">Fast Food</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pizza Menu -->
+    <section id="pizza" class="menu-items category-section active">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="pizza-title">Pizza Menu</h2>
+                <p id="pizza-subtitle">Delicious pizzas with authentic South Punjab flavors</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Margherita Pizza">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Margherita Pizza</h3>
+                        <p>Classic pizza with tomato sauce, fresh mozzarella, and basil</p>
+                        <span class="menu-price">Rs. 899</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="BBQ Chicken Pizza">
+                    </div>
+                    <div class="menu-content">
+                        <h3>BBQ Chicken Pizza</h3>
+                        <p>Grilled chicken, red onions, cilantro, and tangy BBQ sauce</p>
+                        <span class="menu-price">Rs. 1,199</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Veggie Supreme Pizza">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Veggie Supreme Pizza</h3>
+                        <p>Loaded with bell peppers, mushrooms, onions, olives, and tomatoes</p>
+                        <span class="menu-price">Rs. 1,099</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pepperoni Pizza">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Pepperoni Pizza</h3>
+                        <p>Classic pepperoni pizza with extra cheese and our signature sauce</p>
+                        <span class="menu-price">Rs. 1,099</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cheese Burst Pizza">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Cheese Burst Pizza</h3>
+                        <p>Double layer of cheese with your choice of toppings</p>
+                        <span class="menu-price">Rs. 1,299</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Burgers Menu -->
+    <section id="burgers" class="menu-items category-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="burgers-title">Burgers Menu</h2>
+                <p id="burgers-subtitle">Juicy burgers made with premium ingredients</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cheese Burger">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Cheese Burger</h3>
+                        <p>Beef patty with cheese, lettuce, tomato, and special sauce</p>
+                        <span class="menu-price">Rs. 399</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Veg Burger">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Veg Burger</h3>
+                        <p>Vegetable patty with fresh lettuce, tomato, and mayo</p>
+                        <span class="menu-price">Rs. 299</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1586816001966-79b736744398?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Zinger Burger">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Zinger Burger</h3>
+                        <p>Crispy chicken fillet with mayo and fresh vegetables</p>
+                        <span class="menu-price">Rs. 449</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fast Food Menu -->
+    <section id="fastfood" class="menu-items category-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="fastfood-title">Fast Food Menu</h2>
+                <p id="fastfood-subtitle">Quick bites and refreshing drinks</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1634034379073-f689b460a3fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="French Fries">
+                    </div>
+                    <div class="menu-content">
+                        <h3>French Fries</h3>
+                        <p>Crispy golden fries with a sprinkle of salt</p>
+                        <span class="menu-price">Rs. 199</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1608039829570-4d7c5c79aa2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Garlic Bread">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Garlic Bread</h3>
+                        <p>Toasted bread with garlic butter and herbs</p>
+                        <span class="menu-price">Rs. 249</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Coke">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Coke</h3>
+                        <p>Refreshing Coca-Cola served chilled</p>
+                        <span class="menu-price">Rs. 99</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-img">
+                        <img src="https://images.unsplash.com/photo-1634944440746-5f70f855d8c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pepsi">
+                    </div>
+                    <div class="menu-content">
+                        <h3>Pepsi</h3>
+                        <p>Ice cold Pepsi for your refreshment</p>
+                        <span class="menu-price">Rs. 99</span>
+                        <a href="contact.html" class="btn">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>South Punjab Spice Delight</h3>
+                    <p>Serving the best pizza and burgers in South Punjab since 2010. Made with fresh ingredients and local spices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/923080432842" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <a href="https://www.google.com/maps/search/shahjmal+main+street" target="_blank" class="contact-link">
+                        <i class="fas fa-map-marker-alt"></i> Shahjmal Main Street
+                    </a>
+                    <a href="tel:+923080432842" class="contact-link">
+                        <i class="fas fa-phone"></i> (0308) 0432842
+                    </a>
+                    <a href="https://wa.me/923080432842" target="_blank" class="contact-link">
+                        <i class="fab fa-whatsapp"></i> WhatsApp: 03080432842
+                    </a>
+                    <a href="mailto:awaisaziz8832@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope"></i> awaisaziz8832@gmail.com
+                    </a>
+                    <p class="contact-link"><i class="fas fa-clock"></i> Mon-Sun: 11:00 AM - 11:00 PM</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 South Punjab Spice Delight. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language switching functionality
+        function changeLanguage(lang) {
+            if (lang === 'english') {
+                document.getElementById('menu-hero-title').textContent = "Our Delicious Menu";
+                document.getElementById('menu-hero-text').textContent = "Explore our wide variety of pizzas, burgers, and fast food made with the finest ingredients and authentic South Punjab spices.";
+                document.getElementById('order-btn').textContent = "Order Now";
+                document.getElementById('home-btn').textContent = "Back to Home";
+                document.getElementById('pizza-title').textContent = "Pizza Menu";
+                document.getElementById('pizza-subtitle').textContent = "Delicious pizzas with authentic South Punjab flavors";
+                document.getElementById('burgers-title').textContent = "Burgers Menu";
+                document.getElementById('burgers-subtitle').textContent = "Juicy burgers made with premium ingredients";
+                document.getElementById('fastfood-title').textContent = "Fast Food Menu";
+                document.getElementById('fastfood-subtitle').textContent = "Quick bites and refreshing drinks";
+                document.getElementById('current-lang').textContent = "English";
+            } else if (lang === 'urdu') {
+                document.getElementById('menu-hero-title').textContent = "ہمارا مزیدار مینو";
+                document.getElementById('menu-hero-text').textContent = "ہمارے پیزا، برگر اور فاسٹ فوڈ کی وسیع اقسام کو دریافت کریں جو بہترین اجزاء اور مستند جنوبی پنجاب کے مصالحوں سے تیار کیا گیا ہے۔";
+                document.getElementById('order-btn').textContent = "ابھی آرڈر کریں";
+                document.getElementById('home-btn').textContent = "ہوم پر واپس جائیں";
+                document.getElementById('pizza-title').textContent = "پیزا مینو";
+                document.getElementById('pizza-subtitle').textContent = "مستند جنوبی پنجاب کے ذائقوں کے ساتھ مزیدار پیزا";
+                document.getElementById('burgers-title').textContent = "برگر مینو";
+                document.getElementById('burgers-subtitle').textContent = "پریمیم اجزاء سے بنے ہوئے رسیلے برگر";
+                document.getElementById('fastfood-title').textContent = "فاسٹ فوڈ مینو";
+                document.getElementById('fastfood-subtitle').textContent = "فوری ناشتہ اور تازگی بخش مشروبات";
+                document.getElementById('current-lang').textContent = "اردو";
+            } else if (lang === 'saraiki') {
+                document.getElementById('menu-hero-title').textContent = "ساݙا مزیدار مینو";
+                document.getElementById('menu-hero-text').textContent = "ساݙے پیزا، برگر تے فاسٹ فوڈ دی وسعی قسماں دریافت کرو جو بہترین اجزاء تے مستند جنوبی پنجاب دے مصالحے نال تیار کیتا ڳیا ہے۔";
+                document.getElementById('order-btn').textContent = "ہݨ آرڈر کرو";
+                document.getElementById('home-btn').textContent = "گھر واپس ونڄو";
+                document.getElementById('pizza-title').textContent = "پیزا مینو";
+                document.getElementById('pizza-subtitle').textContent = "مستند جنوبی پنجاب دے ذائقے نال مزیدار پیزا";
+                document.getElementById('burgers-title').textContent = "برگر مینو";
+                document.getElementById('burgers-subtitle').textContent = "پریمیم اجزاء نال بݨائے ڳئے رسیلے برگر";
+                document.getElementById('fastfood-title').textContent = "فاسٹ فوڈ مینو";
+                document.getElementById('fastfood-subtitle').textContent = "فوری ناشتہ تے تازگی بخش مشروبات";
+                document.getElementById('current-lang').textContent = "سرائیکی";
+            }
+            
+            // Close the dropdown
+            document.querySelector('.lang-dropdown').style.display = 'none';
+        }
+
+        // Category tabs functionality
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.category-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all category sections
+                document.querySelectorAll('.category-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show the selected category section
+                const category = tab.getAttribute('data-category');
+                document.getElementById(category).classList.add('active');
+            });
+        });
+
+        // Language dropdown functionality
+        document.querySelector('.lang-btn').addEventListener('click', function() {
+            const dropdown = document.querySelector('.lang-dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.lang-btn')) {
+                const dropdown = document.querySelector('.lang-dropdown');
+                if (dropdown.style.display === 'block') {
+                    dropdown.style.display = 'none';
+                }
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    window.location.href = targetId;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
