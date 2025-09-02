@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delicious Bites - Pizza & Burger Restaurant</title>
+    <title>South Punjab Spice Delight - Pizza & Burgers</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         :root {
-            --primary: #e74c3c;
+            --primary: #d35400;
             --secondary: #f39c12;
+            --accent: #e67e22;
             --dark: #2c3e50;
-            --light: #ecf0f1;
+            --light: #f5f5f5;
+            --gold: #ffd700;
+            --text: #333;
             --success: #27ae60;
         }
 
         body {
             background-color: #f9f9f9;
-            color: #333;
+            color: var(--text);
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -36,13 +41,13 @@
 
         /* Header Styles */
         header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
             padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .header-content {
@@ -54,22 +59,28 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .logo img {
-            height: 50px;
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--gold);
         }
 
         .logo h1 {
             font-size: 1.8rem;
             font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo span {
+            color: var(--gold);
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 30px;
         }
 
         nav a {
@@ -78,38 +89,92 @@
             font-weight: 500;
             font-size: 1.1rem;
             transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover:after {
+            width: 100%;
         }
 
         nav a:hover {
-            color: var(--light);
-            text-decoration: underline;
+            color: var(--gold);
         }
 
+        /* Language Selector */
         .language-selector {
-            display: flex;
-            gap: 10px;
-            align-items: center;
+            position: relative;
+            display: inline-block;
         }
 
         .lang-btn {
-            background: rgba(255, 255, 255, 0.2);
+            background: linear-gradient(to bottom, var(--gold), #daa520);
+            color: var(--dark);
             border: none;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 30px;
             cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
 
-        .lang-btn.active {
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .lang-btn i {
+            font-size: 1.2rem;
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
             background: white;
-            color: var(--primary);
-            font-weight: 600;
+            min-width: 160px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .lang-dropdown a {
+            color: var(--dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        .lang-dropdown a:hover {
+            background: var(--light);
+        }
+
+        .language-selector:hover .lang-dropdown {
+            display: block;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -126,18 +191,22 @@
             font-size: 3.5rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            font-family: 'Montserrat', sans-serif;
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn {
             display: inline-block;
             background: var(--primary);
             color: white;
-            padding: 12px 30px;
+            padding: 14px 32px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
@@ -146,12 +215,13 @@
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .btn:hover {
             background: var(--secondary);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
         }
 
         .btn-outline {
@@ -179,6 +249,7 @@
             font-size: 2.5rem;
             color: var(--dark);
             margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .section-title p {
@@ -198,8 +269,9 @@
             background: var(--light);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .feature-card:hover {
@@ -268,12 +340,18 @@
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .offer-card:hover {
+            transform: scale(1.05);
         }
 
         .offer-card i {
             font-size: 3rem;
             margin-bottom: 20px;
-            color: var(--light);
+            color: var(--gold);
         }
 
         .offer-card h3 {
@@ -303,6 +381,12 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
         }
 
         .testimonial-card .rating {
@@ -440,8 +524,8 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-utensils fa-2x"></i>
-                    <h1>Delicious Bites</h1>
+                    <i class="fas fa-utensils logo-icon"></i>
+                    <h1>South Punjab <span>Spice Delight</span></h1>
                 </div>
                 <nav>
                     <ul>
@@ -452,9 +536,14 @@
                     </ul>
                 </nav>
                 <div class="language-selector">
-                    <button class="lang-btn active">EN</button>
-                    <button class="lang-btn">UR</button>
-                    <button class="lang-btn">SK</button>
+                    <button class="lang-btn">
+                        <i class="fas fa-globe"></i> English
+                    </button>
+                    <div class="lang-dropdown">
+                        <a href="#">English</a>
+                        <a href="#">Urdu</a>
+                        <a href="#">Saraiki</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -464,8 +553,8 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h2>Delicious Pizza & Burgers</h2>
-                <p>Experience the taste of perfection with our handmade pizzas and juicy burgers. Made with fresh ingredients and served with love.</p>
+                <h2>Authentic South Punjab Flavors</h2>
+                <p>Experience the taste of South Punjab with our handcrafted pizzas and juicy burgers. Made with local spices and fresh ingredients.</p>
                 <div class="hero-buttons">
                     <a href="#order" class="btn">Order Now</a>
                     <a href="#menu" class="btn btn-outline">View Menu</a>
@@ -475,7 +564,7 @@
     </section>
 
     <!-- Featured Items Section -->
-    <section class="features">
+    <section class="features" id="menu">
         <div class="container">
             <div class="section-title">
                 <h2>Our Specialties</h2>
@@ -484,34 +573,34 @@
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-img">
-                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pepperoni Pizza">
+                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Spicy Pepperoni Pizza">
                     </div>
                     <div class="feature-content">
-                        <h3>Pepperoni Pizza</h3>
-                        <p>Classic pizza with spicy pepperoni, mozzarella cheese, and our signature tomato sauce.</p>
-                        <p class="price">$12.99</p>
+                        <h3>Spicy Pepperoni Pizza</h3>
+                        <p>Classic pizza with spicy pepperoni, mozzarella cheese, and our signature tomato sauce with South Punjab spices.</p>
+                        <p class="price">Rs. 1,299</p>
                         <a href="#order" class="btn">Order Now</a>
                     </div>
                 </div>
                 <div class="feature-card">
                     <div class="feature-img">
-                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beef Burger">
+                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Chapli Burger">
                     </div>
                     <div class="feature-content">
-                        <h3>Classic Beef Burger</h3>
-                        <p>Juicy beef patty with fresh lettuce, tomato, onion, and our special sauce in a brioche bun.</p>
-                        <p class="price">$9.99</p>
+                        <h3>Chapli Burger</h3>
+                        <p>Juicy chapli kebab patty with fresh lettuce, tomato, onion, and our special sauce in a brioche bun.</p>
+                        <p class="price">Rs. 499</p>
                         <a href="#order" class="btn">Order Now</a>
                     </div>
                 </div>
                 <div class="feature-card">
                     <div class="feature-img">
-                        <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="BBQ Chicken Pizza">
+                        <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tandoori Pizza">
                     </div>
                     <div class="feature-content">
-                        <h3>BBQ Chicken Pizza</h3>
-                        <p>Grilled chicken, red onions, cilantro, and tangy BBQ sauce on a thin crust.</p>
-                        <p class="price">$14.99</p>
+                        <h3>Tandoori Pizza</h3>
+                        <p>Grilled chicken, red onions, cilantro, and tangy BBQ sauce with traditional South Punjab spices on a thin crust.</p>
+                        <p class="price">Rs. 1,499</p>
                         <a href="#order" class="btn">Order Now</a>
                     </div>
                 </div>
@@ -520,7 +609,7 @@
     </section>
 
     <!-- Special Offers Section -->
-    <section class="offers">
+    <section class="offers" id="offers">
         <div class="container">
             <div class="section-title">
                 <h2>Special Offers</h2>
@@ -531,20 +620,20 @@
                     <i class="fas fa-pizza-slice"></i>
                     <h3>Family Deal</h3>
                     <p>2 Large Pizzas + Garlic Bread + 1.5L Drink</p>
-                    <p class="price">$29.99</p>
+                    <p class="price">Rs. 2,499</p>
                     <a href="#order" class="btn">Order Now</a>
                 </div>
                 <div class="offer-card">
                     <i class="fas fa-hamburger"></i>
                     <h3>Burger Combo</h3>
                     <p>2 Burgers + Fries + 2 Drinks</p>
-                    <p class="price">$18.99</p>
+                    <p class="price">Rs. 899</p>
                     <a href="#order" class="btn">Order Now</a>
                 </div>
                 <div class="offer-card">
                     <i class="fas fa-gift"></i>
                     <h3>Weekend Special</h3>
-                    <p>20% OFF on all orders above $40</p>
+                    <p>20% OFF on all orders above Rs. 2,000</p>
                     <p class="price">Use code: WEEKEND20</p>
                     <a href="#order" class="btn">Order Now</a>
                 </div>
@@ -553,7 +642,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials">
+    <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="section-title">
                 <h2>Customer Reviews</h2>
@@ -570,10 +659,10 @@
                     </div>
                     <p>"The best pizza I've ever had! The crust is perfect and the ingredients are always fresh. Highly recommend!"</p>
                     <div class="customer">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Ali Raza">
                         <div class="customer-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>Regular Customer</p>
+                            <h4>Ali Raza</h4>
+                            <p>Multan</p>
                         </div>
                     </div>
                 </div>
@@ -587,10 +676,10 @@
                     </div>
                     <p>"Their burgers are juicy and flavorful. The combo deals are great value for money. Will definitely order again!"</p>
                     <div class="customer">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Fatima Khan">
                         <div class="customer-info">
-                            <h4>Michael Chen</h4>
-                            <p>Food Blogger</p>
+                            <h4>Fatima Khan</h4>
+                            <p>Bahawalpur</p>
                         </div>
                     </div>
                 </div>
@@ -602,12 +691,12 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>"Fast delivery and the food is always hot and fresh. The BBQ chicken pizza is my favorite! Great service."</p>
+                    <p>"Fast delivery and the food is always hot and fresh. The Tandoori pizza is my favorite! Great service."</p>
                     <div class="customer">
-                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Emma Rodriguez">
+                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Ahmed Nawaz">
                         <div class="customer-info">
-                            <h4>Emma Rodriguez</h4>
-                            <p>Local Guide</p>
+                            <h4>Ahmed Nawaz</h4>
+                            <p>DG Khan</p>
                         </div>
                     </div>
                 </div>
@@ -616,16 +705,16 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Delicious Bites</h3>
-                    <p>Serving the best pizza and burgers in town since 2010. Made with fresh ingredients and love.</p>
+                    <h3>South Punjab Spice Delight</h3>
+                    <p>Serving the best pizza and burgers in South Punjab since 2010. Made with fresh ingredients and local spices.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
@@ -641,29 +730,70 @@
                 </div>
                 <div class="footer-column">
                     <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Food Street, City</p>
-                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
-                    <p><i class="fas fa-envelope"></i> info@deliciousbites.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Food Street, Multan</p>
+                    <p><i class="fas fa-phone"></i> (061) 123-4567</p>
+                    <p><i class="fas fa-mobile-alt"></i> 0300-1234567</p>
+                    <p><i class="fas fa-envelope"></i> info@southpunjabspice.com</p>
                     <p><i class="fas fa-clock"></i> Mon-Sun: 11:00 AM - 11:00 PM</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Delicious Bites. All rights reserved.</p>
+                <p>&copy; 2023 South Punjab Spice Delight. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple language selector functionality
-        document.querySelectorAll('.lang-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.classList.remove('active');
+        // Language dropdown functionality
+        document.querySelector('.lang-btn').addEventListener('click', function() {
+            const dropdown = document.querySelector('.lang-dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.lang-btn')) {
+                const dropdown = document.querySelector('.lang-dropdown');
+                if (dropdown.style.display === 'block') {
+                    dropdown.style.display = 'none';
+                }
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
                 });
-                this.classList.add('active');
+            });
+        });
+
+        // Add active class to navigation links on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
                 
-                // In a real implementation, this would change the page language
-                alert('Language changed to: ' + this.textContent);
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
             });
         });
     </script>
