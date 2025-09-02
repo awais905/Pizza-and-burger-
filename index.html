@@ -15,18 +15,18 @@
         }
 
         :root {
-            --primary: #d35400;
-            --secondary: #f39c12;
-            --accent: #e67e22;
-            --dark: #2c3e50;
-            --light: #f5f5f5;
-            --gold: #ffd700;
-            --text: #333;
+            --primary: #8B0000;
+            --secondary: #FF8C00;
+            --accent: #B22222;
+            --dark: #2C1E1E;
+            --light: #FFF5F5;
+            --gold: #FFD700;
+            --text: #FFF;
             --success: #27ae60;
         }
 
         body {
-            background-color: #f9f9f9;
+            background-color: #2C1E1E;
             color: var(--text);
             line-height: 1.6;
             scroll-behavior: smooth;
@@ -237,7 +237,7 @@
         /* Features Section */
         .features {
             padding: 80px 0;
-            background: white;
+            background: var(--dark);
         }
 
         .section-title {
@@ -247,13 +247,13 @@
 
         .section-title h2 {
             font-size: 2.5rem;
-            color: var(--dark);
+            color: var(--text);
             margin-bottom: 15px;
             font-family: 'Montserrat', sans-serif;
         }
 
         .section-title p {
-            color: #777;
+            color: #ccc;
             font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto;
@@ -266,12 +266,13 @@
         }
 
         .feature-card {
-            background: var(--light);
+            background: rgba(139, 0, 0, 0.2);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
             cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .feature-card:hover {
@@ -301,23 +302,23 @@
         .feature-content h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
-            color: var(--dark);
+            color: var(--text);
         }
 
         .feature-content p {
-            color: #666;
+            color: #ccc;
             margin-bottom: 15px;
         }
 
         .price {
-            color: var(--primary);
+            color: var(--gold);
             font-weight: 700;
             font-size: 1.2rem;
         }
 
         /* Special Offers */
         .offers {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(to right, var(--primary), var(--accent));
             padding: 80px 0;
             color: white;
             text-align: center;
@@ -342,6 +343,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
             cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .offer-card:hover {
@@ -367,7 +369,7 @@
         /* Testimonials */
         .testimonials {
             padding: 80px 0;
-            background: var(--light);
+            background: var(--dark);
         }
 
         .testimonial-grid {
@@ -377,12 +379,13 @@
         }
 
         .testimonial-card {
-            background: white;
+            background: rgba(139, 0, 0, 0.2);
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
             cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .testimonial-card:hover {
@@ -398,7 +401,7 @@
         .testimonial-card p {
             margin-bottom: 20px;
             font-style: italic;
-            color: #555;
+            color: #ccc;
         }
 
         .customer {
@@ -415,11 +418,11 @@
         }
 
         .customer-info h4 {
-            color: var(--dark);
+            color: var(--text);
         }
 
         .customer-info p {
-            color: #777;
+            color: #999;
             font-style: normal;
             font-size: 0.9rem;
             margin: 0;
@@ -430,6 +433,7 @@
             background: var(--dark);
             color: white;
             padding: 60px 0 30px;
+            border-top: 2px solid var(--primary);
         }
 
         .footer-content {
@@ -463,6 +467,18 @@
         .footer-column a:hover {
             color: var(--secondary);
             text-decoration: underline;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--gold);
         }
 
         .social-links {
@@ -540,9 +556,9 @@
                         <i class="fas fa-globe"></i> English
                     </button>
                     <div class="lang-dropdown">
-                        <a href="#">English</a>
-                        <a href="#">Urdu</a>
-                        <a href="#">Saraiki</a>
+                        <a href="#" onclick="changeLanguage('english')">English</a>
+                        <a href="#" onclick="changeLanguage('urdu')">Urdu</a>
+                        <a href="#" onclick="changeLanguage('saraiki')">Saraiki</a>
                     </div>
                 </div>
             </div>
@@ -553,11 +569,11 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h2>Authentic South Punjab Flavors</h2>
-                <p>Experience the taste of South Punjab with our handcrafted pizzas and juicy burgers. Made with local spices and fresh ingredients.</p>
+                <h2 id="hero-title">Authentic South Punjab Flavors</h2>
+                <p id="hero-text">Experience the taste of South Punjab with our handcrafted pizzas and juicy burgers. Made with local spices and fresh ingredients.</p>
                 <div class="hero-buttons">
-                    <a href="#order" class="btn">Order Now</a>
-                    <a href="#menu" class="btn btn-outline">View Menu</a>
+                    <a href="#order" class="btn" id="order-btn">Order Now</a>
+                    <a href="#menu" class="btn btn-outline" id="menu-btn">View Menu</a>
                 </div>
             </div>
         </div>
@@ -567,8 +583,8 @@
     <section class="features" id="menu">
         <div class="container">
             <div class="section-title">
-                <h2>Our Specialties</h2>
-                <p>Discover our most popular dishes that customers love</p>
+                <h2 id="menu-title">Our Specialties</h2>
+                <p id="menu-subtitle">Discover our most popular dishes that customers love</p>
             </div>
             <div class="feature-grid">
                 <div class="feature-card">
@@ -612,8 +628,8 @@
     <section class="offers" id="offers">
         <div class="container">
             <div class="section-title">
-                <h2>Special Offers</h2>
-                <p>Take advantage of our limited-time deals and discounts</p>
+                <h2 id="offers-title">Special Offers</h2>
+                <p id="offers-subtitle">Take advantage of our limited-time deals and discounts</p>
             </div>
             <div class="offer-cards">
                 <div class="offer-card">
@@ -645,8 +661,8 @@
     <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="section-title">
-                <h2>Customer Reviews</h2>
-                <p>See what our customers are saying about us</p>
+                <h2 id="testimonials-title">Customer Reviews</h2>
+                <p id="testimonials-subtitle">See what our customers are saying about us</p>
             </div>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
@@ -714,7 +730,7 @@
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/923080432842" target="_blank"><i class="fab fa-whatsapp"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
@@ -730,11 +746,19 @@
                 </div>
                 <div class="footer-column">
                     <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Food Street, Multan</p>
-                    <p><i class="fas fa-phone"></i> (061) 123-4567</p>
-                    <p><i class="fas fa-mobile-alt"></i> 0300-1234567</p>
-                    <p><i class="fas fa-envelope"></i> info@southpunjabspice.com</p>
-                    <p><i class="fas fa-clock"></i> Mon-Sun: 11:00 AM - 11:00 PM</p>
+                    <a href="https://www.google.com/maps/search/shahjmal+main+street" target="_blank" class="contact-link">
+                        <i class="fas fa-map-marker-alt"></i> Shahjmal Main Street
+                    </a>
+                    <a href="tel:+923080432842" class="contact-link">
+                        <i class="fas fa-phone"></i> (0308) 0432842
+                    </a>
+                    <a href="https://wa.me/923080432842" target="_blank" class="contact-link">
+                        <i class="fab fa-whatsapp"></i> WhatsApp: 03080432842
+                    </a>
+                    <a href="mailto:awaisaziz8832@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope"></i> awaisaziz8832@gmail.com
+                    </a>
+                    <p class="contact-link"><i class="fas fa-clock"></i> Mon-Sun: 11:00 AM - 11:00 PM</p>
                 </div>
             </div>
             <div class="copyright">
@@ -744,6 +768,50 @@
     </footer>
 
     <script>
+        // Language switching functionality
+        function changeLanguage(lang) {
+            if (lang === 'english') {
+                document.getElementById('hero-title').textContent = "Authentic South Punjab Flavors";
+                document.getElementById('hero-text').textContent = "Experience the taste of South Punjab with our handcrafted pizzas and juicy burgers. Made with local spices and fresh ingredients.";
+                document.getElementById('order-btn').textContent = "Order Now";
+                document.getElementById('menu-btn').textContent = "View Menu";
+                document.getElementById('menu-title').textContent = "Our Specialties";
+                document.getElementById('menu-subtitle').textContent = "Discover our most popular dishes that customers love";
+                document.getElementById('offers-title').textContent = "Special Offers";
+                document.getElementById('offers-subtitle').textContent = "Take advantage of our limited-time deals and discounts";
+                document.getElementById('testimonials-title').textContent = "Customer Reviews";
+                document.getElementById('testimonials-subtitle').textContent = "See what our customers are saying about us";
+                document.querySelector('.lang-btn').innerHTML = '<i class="fas fa-globe"></i> English';
+            } else if (lang === 'urdu') {
+                document.getElementById('hero-title').textContent = "اصلی جنوبی پنجاب کے ذائقے";
+                document.getElementById('hero-text').textContent = "ہاتھ سے بنے ہوئے پیزا اور رس دار برگر کے ساتھ جنوبی پنجاب کے ذائقے کا تجربہ کریں۔ مقالی مصالحوں اور تازہ اجزاء سے تیار کیا گیا۔";
+                document.getElementById('order-btn').textContent = "ابھی آرڈر کریں";
+                document.getElementById('menu-btn').textContent = "مینو دیکھیں";
+                document.getElementById('menu-title').textContent = "ہماری مخصوص ڈشیں";
+                document.getElementById('menu-subtitle').textContent = "ہماری مقبول ترین ڈشیں دریافت کریں جو گاہک پسند کرتے ہیں";
+                document.getElementById('offers-title').textContent = "خصوصی پیشکشیں";
+                document.getElementById('offers-subtitle').textContent = "ہماری محدود وقت کی ڈیلز اور رعایتوں سے فائدہ اٹھائیں";
+                document.getElementById('testimonials-title').textContent = "گاہک کے جائزے";
+                document.getElementById('testimonials-subtitle').textContent = "دیکھیں کہ ہمارے گاہک ہمارے بارے میں کیا کہہ رہے ہیں";
+                document.querySelector('.lang-btn').innerHTML = '<i class="fas fa-globe"></i> اردو';
+            } else if (lang === 'saraiki') {
+                document.getElementById('hero-title').textContent = "اصلی جنوبی پنجاب دے ذائقے";
+                document.getElementById('hero-text').textContent = "ہتھ نال بݨائے ڳئے پیزا تے رسیلے برگراں نال جنوبی پنجاب دے ذائقے دا تجربہ کرو۔ مقامی مصالحے تے تازہ اجزاء نال تیار کیتا ڳیا۔";
+                document.getElementById('order-btn').textContent = "ہݨ آرڈر کرو";
+                document.getElementById('menu-btn').textContent = "مینو ݙیکھو";
+                document.getElementById('menu-title').textContent = "ساݙیاں مخصوص ڈشاں";
+                document.getElementById('menu-subtitle').textContent = "ساݙیاں مقبول ترین ڈشاں دریافت کرو جو گاہک پسند کریندن";
+                document.getElementById('offers-title').textContent = "خصوصی پیشکشاں";
+                document.getElementById('offers-subtitle').textContent = "ساݙیاں محدود وقت دیاں ڈیلاں تے رعایتاں توں فائدہ چاؤ";
+                document.getElementById('testimonials-title').textContent = "گاہک دے جائزے";
+                document.getElementById('testimonials-subtitle').textContent = "ݙیکھو جو ساݙے گاہک اساݙے بارے کیاہ آہدے پن";
+                document.querySelector('.lang-btn').innerHTML = '<i class="fas fa-globe"></i> سرائیکی';
+            }
+            
+            // Close the dropdown
+            document.querySelector('.lang-dropdown').style.display = 'none';
+        }
+
         // Language dropdown functionality
         document.querySelector('.lang-btn').addEventListener('click', function() {
             const dropdown = document.querySelector('.lang-dropdown');
