@@ -5,31 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu - South Punjab Spice Delight</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
         :root {
-            --primary: #8B0000;
-            --secondary: #FF8C00;
-            --accent: #B22222;
-            --dark: #2C1E1E;
-            --light: #FFF5F5;
-            --gold: #FFD700;
-            --text: #FFF;
-            --success: #27ae60;
+            --primary: #9D2235;
+            --secondary: #E6C229;
+            --accent: #C41E3A;
+            --dark: #1A1A1A;
+            --light: #F8F8F8;
+            --text: #333333;
+            --gray: #777777;
+            --gold: #D4AF37;
+            --success: #2E8B57;
+            --transition: all 0.3s ease;
         }
 
         body {
-            background-color: #2C1E1E;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
             color: var(--text);
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
         }
 
         .container {
@@ -41,13 +50,22 @@
 
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            background: rgba(26, 26, 26, 0.95);
             color: white;
             padding: 15px 0;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(26, 26, 26, 0.98);
         }
 
         .header-content {
@@ -70,7 +88,6 @@
         .logo h1 {
             font-size: 1.8rem;
             font-weight: 700;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .logo span {
@@ -80,7 +97,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 35px;
         }
 
         nav a {
@@ -88,7 +105,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             position: relative;
             padding: 5px 0;
         }
@@ -101,7 +118,7 @@
             bottom: 0;
             left: 0;
             background-color: var(--gold);
-            transition: width 0.3s ease;
+            transition: var(--transition);
         }
 
         nav a:hover:after {
@@ -119,7 +136,7 @@
         }
 
         .lang-btn {
-            background: linear-gradient(to bottom, var(--gold), #daa520);
+            background: linear-gradient(to bottom, var(--gold), #C99A05);
             color: var(--dark);
             border: none;
             padding: 10px 20px;
@@ -129,13 +146,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: var(--transition);
         }
 
         .lang-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
         }
 
         .lang-btn i {
@@ -150,22 +167,34 @@
             background: white;
             min-width: 160px;
             border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             z-index: 1;
             margin-top: 10px;
             overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .lang-dropdown a {
             color: var(--dark);
-            padding: 12px 16px;
+            padding: 12px 20px;
             text-decoration: none;
             display: block;
-            transition: background 0.3s ease;
+            transition: var(--transition);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .lang-dropdown a:last-child {
+            border-bottom: none;
         }
 
         .lang-dropdown a:hover {
-            background: var(--light);
+            background: #f9f9f9;
+            padding-left: 25px;
         }
 
         .language-selector:hover .lang-dropdown {
@@ -177,56 +206,96 @@
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
-            padding: 80px 20px;
+            padding: 180px 20px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(157, 34, 53, 0.3) 0%, rgba(196, 30, 58, 0.3) 100%);
+            z-index: 0;
         }
 
         .menu-hero-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .menu-hero h2 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            font-family: 'Montserrat', sans-serif;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeUp 1s ease;
         }
 
         .menu-hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .btn {
             display: inline-block;
-            background: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--accent));
             color: white;
-            padding: 14px 32px;
+            padding: 16px 36px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
             margin: 10px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(157, 34, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            background: var(--secondary);
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 20px rgba(157, 34, 53, 0.5);
         }
 
         .btn-outline {
             background: transparent;
             border: 2px solid white;
+            box-shadow: none;
         }
 
         .btn-outline:hover {
@@ -234,10 +303,15 @@
             color: var(--primary);
         }
 
+        .hero-buttons {
+            animation: fadeUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
         /* Menu Categories */
         .menu-categories {
-            padding: 60px 0;
-            background: var(--dark);
+            padding: 80px 0 60px;
+            background: white;
         }
 
         .category-tabs {
@@ -249,29 +323,34 @@
         }
 
         .category-tab {
-            background: rgba(139, 0, 0, 0.3);
-            color: white;
+            background: rgba(157, 34, 53, 0.1);
+            color: var(--primary);
             border: none;
-            padding: 12px 25px;
+            padding: 14px 28px;
             border-radius: 30px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(157, 34, 53, 0.1);
         }
 
         .category-tab.active {
             background: var(--primary);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: white;
+            box-shadow: 0 5px 20px rgba(157, 34, 53, 0.3);
         }
 
         .category-tab:hover {
             background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
         }
 
         /* Menu Items */
         .menu-items {
-            padding: 40px 0;
+            padding: 40px 0 80px;
+            background: white;
         }
 
         .category-section {
@@ -284,46 +363,61 @@
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--text);
+            font-size: 2.8rem;
+            color: var(--dark);
             margin-bottom: 15px;
-            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
         }
 
         .section-title p {
-            color: #ccc;
-            font-size: 1.1rem;
+            color: var(--gray);
+            font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto;
+            margin: 25px auto 0;
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
         }
 
         .menu-card {
-            background: rgba(139, 0, 0, 0.2);
-            border-radius: 10px;
+            background: white;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            top: 0;
         }
 
         .menu-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .menu-img {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
+            position: relative;
         }
 
         .menu-img img {
@@ -338,52 +432,57 @@
         }
 
         .menu-content {
-            padding: 20px;
+            padding: 25px;
         }
 
         .menu-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--text);
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: var(--dark);
         }
 
         .menu-content p {
-            color: #ccc;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         .size-options {
             display: flex;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .size-btn {
-            padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            background: rgba(157, 34, 53, 0.1);
             border: none;
             border-radius: 20px;
-            color: white;
+            color: var(--primary);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            font-weight: 500;
         }
 
         .size-btn.active {
             background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(157, 34, 53, 0.3);
         }
 
         .size-btn:hover {
             background: var(--primary);
+            color: white;
         }
 
         .menu-price {
-            color: var(--gold);
+            color: var(--primary);
             font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+            font-size: 1.4rem;
             display: block;
+            margin-bottom: 20px;
         }
 
         /* Order Modal */
@@ -395,78 +494,117 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
+            z-index: 2000;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         .modal-content {
-            background: var(--dark);
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
             max-width: 500px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .modal-header h3 {
-            font-size: 1.5rem;
-            color: var(--text);
+            font-size: 1.8rem;
+            color: var(--dark);
         }
 
         .close-modal {
             background: none;
             border: none;
-            color: white;
-            font-size: 1.5rem;
+            color: var(--gray);
+            font-size: 1.8rem;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
         }
 
         .order-details {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .order-details p {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            color: var(--text);
         }
 
         .order-options {
             display: flex;
             gap: 15px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* Footer */
         footer {
             background: var(--dark);
             color: white;
-            padding: 60px 0 30px;
-            border-top: 2px solid var(--primary);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 50px;
+            margin-bottom: 50px;
         }
 
         .footer-column h3 {
             font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
+            margin-bottom: 25px;
+            color: var(--gold);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
         }
 
         .footer-column p, .footer-column li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             opacity: 0.8;
+            line-height: 1.7;
         }
 
         .footer-column ul {
@@ -476,20 +614,20 @@
         .footer-column a {
             color: white;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition);
         }
 
         .footer-column a:hover {
-            color: var(--secondary);
-            text-decoration: underline;
+            color: var(--gold);
+            padding-left: 5px;
         }
 
         .contact-link {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
+            gap: 12px;
+            margin-bottom: 15px;
+            transition: var(--transition);
             color: white;
             text-decoration: none;
         }
@@ -501,18 +639,18 @@
         .social-links {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .social-links a:hover {
@@ -529,6 +667,16 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .menu-hero h2 {
+                font-size: 3.2rem;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -541,28 +689,63 @@
                 justify-content: center;
             }
             
+            .menu-hero {
+                padding: 150px 20px 100px;
+            }
+            
             .menu-hero h2 {
                 font-size: 2.5rem;
+            }
+            
+            .menu-hero p {
+                font-size: 1.1rem;
             }
             
             .menu-grid, .footer-content {
                 grid-template-columns: 1fr;
             }
             
+            .section-title h2 {
+                font-size: 2.3rem;
+            }
+            
+            .order-options {
+                flex-direction: column;
+            }
+            
             .category-tabs {
                 flex-direction: column;
                 align-items: center;
             }
+        }
 
-            .order-options {
-                flex-direction: column;
-            }
+        /* Animation utilities */
+        .fade-in {
+            animation: fadeIn 1s ease;
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 1s ease;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 1s ease;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
 <body>
     <!-- Header Section -->
-    <header>
+    <header id="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
@@ -624,7 +807,7 @@
                 <p id="pizza-subtitle">Delicious pizzas with authentic South Punjab flavors</p>
             </div>
             <div class="menu-grid">
-                <div class="menu-card">
+                <div class="menu-card slide-in-left">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Margherita Pizza">
                     </div>
@@ -640,7 +823,7 @@
                         <button class="btn" onclick="orderItem('Margherita Pizza', 'small', 799)">Order Now</button>
                     </div>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card fade-in">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="BBQ Chicken Pizza">
                     </div>
@@ -656,7 +839,7 @@
                         <button class="btn" onclick="orderItem('BBQ Chicken Pizza', 'small', 899)">Order Now</button>
                     </div>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card slide-in-right">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Veggie Supreme Pizza">
                     </div>
@@ -672,7 +855,7 @@
                         <button class="btn" onclick="orderItem('Veggie Supreme Pizza', 'small', 849)">Order Now</button>
                     </div>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card slide-in-left">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pepperoni Pizza">
                     </div>
@@ -688,7 +871,7 @@
                         <button class="btn" onclick="orderItem('Pepperoni Pizza', 'small', 899)">Order Now</button>
                     </div>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card fade-in">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cheese Burst Pizza">
                     </div>
@@ -716,7 +899,7 @@
                 <p id="burgers-subtitle">Juicy burgers made with premium ingredients</p>
             </div>
             <div class="menu-grid">
-                <div class="menu-card">
+                <div class="menu-card slide-in-left">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cheese Burger">
                     </div>
@@ -731,7 +914,7 @@
                         <button class="btn" onclick="orderItem('Cheese Burger', 'regular', 399)">Order Now</button>
                     </div>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card fade-in">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Veg Burger">
                     </div>
@@ -746,7 +929,7 @@
                         <button class="btn" onclick="orderItem('Veg Burger', 'regular', 299)">Order Now</button>
                     </div>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card slide-in-right">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1586816001966-79b736744398?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Zinger Burger">
                     </div>
@@ -773,7 +956,7 @@
                 <p id="fastfood-subtitle">Quick bites and refreshing drinks</p>
             </div>
             <div class="menu-grid">
-                <div class="menu-card">
+                <div class="menu-card slide-in-left">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1634034379073-f689b460a3fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="French Fries">
                     </div>
@@ -788,7 +971,7 @@
                         <button class="btn" onclick="orderItem('French Fries', 'regular', 199)">Order Now</button>
                     </div>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card fade-in">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1608039829570-4d7c5c79aa2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Garlic Bread">
                     </div>
@@ -803,7 +986,7 @@
                         <button class="btn" onclick="orderItem('Garlic Bread', '4 pcs', 249)">Order Now</button>
                     </div>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card slide-in-right">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Coke">
                     </div>
@@ -819,7 +1002,7 @@
                         <button class="btn" onclick="orderItem('Coke', '250ml', 99)">Order Now</button>
                     </div>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card fade-in">
                     <div class="menu-img">
                         <img src="https://images.unsplash.com/photo-1634944440746-5f70f855d8c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pepsi">
                     </div>
@@ -883,7 +1066,7 @@
                 </div>
                 <div class="footer-column">
                     <h3>Contact Us</h3>
-                    <a href="https://www.google.com/maps/search/shahjmal+main+street" target="_blank" class="contact-link">
+                    <a href="https://www.google.com/maps/place/Shahjmal,+Dera+Ghazi+Khan,+Punjab,+Pakistan" target="_blank" class="contact-link">
                         <i class="fas fa-map-marker-alt"></i> Shahjmal Main Street
                     </a>
                     <a href="tel:+923080432842" class="contact-link">
@@ -905,6 +1088,16 @@
     </footer>
 
     <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Language switching functionality
         function changeLanguage(lang) {
             if (lang === 'english') {
@@ -1074,6 +1267,25 @@
                 // Let the browser handle them normally
             });
         });
+
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.menu-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize animations
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
