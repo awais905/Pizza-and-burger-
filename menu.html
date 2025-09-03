@@ -353,12 +353,94 @@
             font-size: 0.95rem;
         }
 
+        .size-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .size-btn {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .size-btn.active {
+            background: var(--primary);
+        }
+
+        .size-btn:hover {
+            background: var(--primary);
+        }
+
         .menu-price {
             color: var(--gold);
             font-weight: 700;
             font-size: 1.2rem;
             margin-bottom: 15px;
             display: block;
+        }
+
+        /* Order Modal */
+        .order-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .order-details {
+            margin-bottom: 20px;
+        }
+
+        .order-details p {
+            margin-bottom: 10px;
+        }
+
+        .order-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
         }
 
         /* Footer */
@@ -408,6 +490,8 @@
             gap: 10px;
             margin-bottom: 10px;
             transition: color 0.3s ease;
+            color: white;
+            text-decoration: none;
         }
 
         .contact-link:hover {
@@ -468,6 +552,10 @@
             .category-tabs {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .order-options {
+                flex-direction: column;
             }
         }
     </style>
@@ -543,8 +631,13 @@
                     <div class="menu-content">
                         <h3>Margherita Pizza</h3>
                         <p>Classic pizza with tomato sauce, fresh mozzarella, and basil</p>
-                        <span class="menu-price">Rs. 899</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="small" data-price="799">Small</button>
+                            <button class="size-btn" data-size="medium" data-price="1099">Medium</button>
+                            <button class="size-btn" data-size="large" data-price="1399">Large</button>
+                        </div>
+                        <span class="menu-price">Rs. 799</span>
+                        <button class="btn" onclick="orderItem('Margherita Pizza', 'small', 799)">Order Now</button>
                     </div>
                 </div>
                 <div class="menu-card">
@@ -554,8 +647,13 @@
                     <div class="menu-content">
                         <h3>BBQ Chicken Pizza</h3>
                         <p>Grilled chicken, red onions, cilantro, and tangy BBQ sauce</p>
-                        <span class="menu-price">Rs. 1,199</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="small" data-price="899">Small</button>
+                            <button class="size-btn" data-size="medium" data-price="1199">Medium</button>
+                            <button class="size-btn" data-size="large" data-price="1499">Large</button>
+                        </div>
+                        <span class="menu-price">Rs. 899</span>
+                        <button class="btn" onclick="orderItem('BBQ Chicken Pizza', 'small', 899)">Order Now</button>
                     </div>
                 </div>
                 <div class="menu-card">
@@ -565,8 +663,13 @@
                     <div class="menu-content">
                         <h3>Veggie Supreme Pizza</h3>
                         <p>Loaded with bell peppers, mushrooms, onions, olives, and tomatoes</p>
-                        <span class="menu-price">Rs. 1,099</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="small" data-price="849">Small</button>
+                            <button class="size-btn" data-size="medium" data-price="1149">Medium</button>
+                            <button class="size-btn" data-size="large" data-price="1449">Large</button>
+                        </div>
+                        <span class="menu-price">Rs. 849</span>
+                        <button class="btn" onclick="orderItem('Veggie Supreme Pizza', 'small', 849)">Order Now</button>
                     </div>
                 </div>
                 <div class="menu-card">
@@ -576,8 +679,13 @@
                     <div class="menu-content">
                         <h3>Pepperoni Pizza</h3>
                         <p>Classic pepperoni pizza with extra cheese and our signature sauce</p>
-                        <span class="menu-price">Rs. 1,099</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="small" data-price="899">Small</button>
+                            <button class="size-btn" data-size="medium" data-price="1199">Medium</button>
+                            <button class="size-btn" data-size="large" data-price="1499">Large</button>
+                        </div>
+                        <span class="menu-price">Rs. 899</span>
+                        <button class="btn" onclick="orderItem('Pepperoni Pizza', 'small', 899)">Order Now</button>
                     </div>
                 </div>
                 <div class="menu-card">
@@ -587,8 +695,13 @@
                     <div class="menu-content">
                         <h3>Cheese Burst Pizza</h3>
                         <p>Double layer of cheese with your choice of toppings</p>
-                        <span class="menu-price">Rs. 1,299</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="small" data-price="999">Small</button>
+                            <button class="size-btn" data-size="medium" data-price="1299">Medium</button>
+                            <button class="size-btn" data-size="large" data-price="1599">Large</button>
+                        </div>
+                        <span class="menu-price">Rs. 999</span>
+                        <button class="btn" onclick="orderItem('Cheese Burst Pizza', 'small', 999)">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -610,8 +723,12 @@
                     <div class="menu-content">
                         <h3>Cheese Burger</h3>
                         <p>Beef patty with cheese, lettuce, tomato, and special sauce</p>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="regular" data-price="399">Regular</button>
+                            <button class="size-btn" data-size="large" data-price="499">Large</button>
+                        </div>
                         <span class="menu-price">Rs. 399</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <button class="btn" onclick="orderItem('Cheese Burger', 'regular', 399)">Order Now</button>
                     </div>
                 </div>
                 <div class="menu-card">
@@ -621,8 +738,12 @@
                     <div class="menu-content">
                         <h3>Veg Burger</h3>
                         <p>Vegetable patty with fresh lettuce, tomato, and mayo</p>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="regular" data-price="299">Regular</button>
+                            <button class="size-btn" data-size="large" data-price="399">Large</button>
+                        </div>
                         <span class="menu-price">Rs. 299</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <button class="btn" onclick="orderItem('Veg Burger', 'regular', 299)">Order Now</button>
                     </div>
                 </div>
                 <div class="menu-card">
@@ -632,8 +753,12 @@
                     <div class="menu-content">
                         <h3>Zinger Burger</h3>
                         <p>Crispy chicken fillet with mayo and fresh vegetables</p>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="regular" data-price="449">Regular</button>
+                            <button class="size-btn" data-size="large" data-price="549">Large</button>
+                        </div>
                         <span class="menu-price">Rs. 449</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <button class="btn" onclick="orderItem('Zinger Burger', 'regular', 449)">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -655,8 +780,12 @@
                     <div class="menu-content">
                         <h3>French Fries</h3>
                         <p>Crispy golden fries with a sprinkle of salt</p>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="regular" data-price="199">Regular</button>
+                            <button class="size-btn" data-size="large" data-price="299">Large</button>
+                        </div>
                         <span class="menu-price">Rs. 199</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <button class="btn" onclick="orderItem('French Fries', 'regular', 199)">Order Now</button>
                     </div>
                 </div>
                 <div class="menu-card">
@@ -666,8 +795,12 @@
                     <div class="menu-content">
                         <h3>Garlic Bread</h3>
                         <p>Toasted bread with garlic butter and herbs</p>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="4 pcs" data-price="249">4 pcs</button>
+                            <button class="size-btn" data-size="8 pcs" data-price="399">8 pcs</button>
+                        </div>
                         <span class="menu-price">Rs. 249</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <button class="btn" onclick="orderItem('Garlic Bread', '4 pcs', 249)">Order Now</button>
                     </div>
                 </div>
                 <div class="menu-card">
@@ -677,8 +810,13 @@
                     <div class="menu-content">
                         <h3>Coke</h3>
                         <p>Refreshing Coca-Cola served chilled</p>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="250ml" data-price="99">250ml</button>
+                            <button class="size-btn" data-size="500ml" data-price="149">500ml</button>
+                            <button class="size-btn" data-size="1L" data-price="249">1L</button>
+                        </div>
                         <span class="menu-price">Rs. 99</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <button class="btn" onclick="orderItem('Coke', '250ml', 99)">Order Now</button>
                     </div>
                 </div>
                 <div class="menu-card">
@@ -688,16 +826,39 @@
                     <div class="menu-content">
                         <h3>Pepsi</h3>
                         <p>Ice cold Pepsi for your refreshment</p>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="250ml" data-price="99">250ml</button>
+                            <button class="size-btn" data-size="500ml" data-price="149">500ml</button>
+                            <button class="size-btn" data-size="1L" data-price="249">1L</button>
+                        </div>
                         <span class="menu-price">Rs. 99</span>
-                        <a href="contact.html" class="btn">Order Now</a>
+                        <button class="btn" onclick="orderItem('Pepsi', '250ml', 99)">Order Now</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Order Modal -->
+    <div class="order-modal" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Order Item</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="order-details">
+                <p id="item-details">You're ordering: </p>
+                <p id="price-details">Price: </p>
+            </div>
+            <div class="order-options">
+                <a href="#" id="whatsapp-order" class="btn" target="_blank"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+                <a href="#" id="email-order" class="btn btn-outline"><i class="fas fa-envelope"></i> Order via Email</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
@@ -758,6 +919,7 @@
                 document.getElementById('fastfood-title').textContent = "Fast Food Menu";
                 document.getElementById('fastfood-subtitle').textContent = "Quick bites and refreshing drinks";
                 document.getElementById('current-lang').textContent = "English";
+                document.getElementById('modal-title').textContent = "Order Item";
             } else if (lang === 'urdu') {
                 document.getElementById('menu-hero-title').textContent = "ہمارا مزیدار مینو";
                 document.getElementById('menu-hero-text').textContent = "ہمارے پیزا، برگر اور فاسٹ فوڈ کی وسیع اقسام کو دریافت کریں جو بہترین اجزاء اور مستند جنوبی پنجاب کے مصالحوں سے تیار کیا گیا ہے۔";
@@ -770,6 +932,7 @@
                 document.getElementById('fastfood-title').textContent = "فاسٹ فوڈ مینو";
                 document.getElementById('fastfood-subtitle').textContent = "فوری ناشتہ اور تازگی بخش مشروبات";
                 document.getElementById('current-lang').textContent = "اردو";
+                document.getElementById('modal-title').textContent = "آئٹم آرڈر کریں";
             } else if (lang === 'saraiki') {
                 document.getElementById('menu-hero-title').textContent = "ساݙا مزیدار مینو";
                 document.getElementById('menu-hero-text').textContent = "ساݙے پیزا، برگر تے فاسٹ فوڈ دی وسعی قسماں دریافت کرو جو بہترین اجزاء تے مستند جنوبی پنجاب دے مصالحے نال تیار کیتا ڳیا ہے۔";
@@ -782,6 +945,7 @@
                 document.getElementById('fastfood-title').textContent = "فاسٹ فوڈ مینو";
                 document.getElementById('fastfood-subtitle').textContent = "فوری ناشتہ تے تازگی بخش مشروبات";
                 document.getElementById('current-lang').textContent = "سرائیکی";
+                document.getElementById('modal-title').textContent = "آئٹم آرڈر کرو";
             }
             
             // Close the dropdown
@@ -810,6 +974,73 @@
             });
         });
 
+        // Size selection functionality
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering the card click event
+                
+                // Remove active class from all buttons in the same card
+                const parentCard = this.closest('.menu-card');
+                parentCard.querySelectorAll('.size-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Update price display
+                const price = this.getAttribute('data-price');
+                const priceElement = parentCard.querySelector('.menu-price');
+                priceElement.textContent = `Rs. ${price}`;
+                
+                // Update order button
+                const itemName = parentCard.querySelector('h3').textContent;
+                const size = this.getAttribute('data-size');
+                const orderBtn = parentCard.querySelector('.btn');
+                orderBtn.setAttribute('onclick', `orderItem('${itemName}', '${size}', ${price})`);
+            });
+        });
+
+        // Order item functionality
+        function orderItem(itemName, size, price) {
+            const modal = document.getElementById('orderModal');
+            const itemDetails = document.getElementById('item-details');
+            const priceDetails = document.getElementById('price-details');
+            const whatsappBtn = document.getElementById('whatsapp-order');
+            const emailBtn = document.getElementById('email-order');
+            
+            // Set order details
+            itemDetails.textContent = `You're ordering: ${itemName} (${size})`;
+            priceDetails.textContent = `Price: Rs. ${price}`;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Hello! I would like to order: ${itemName} (${size}) for Rs. ${price}.`;
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            whatsappBtn.href = `https://wa.me/923080432842?text=${encodedMessage}`;
+            
+            // Create email message
+            const emailSubject = `Order for ${itemName} (${size})`;
+            const emailBody = `I would like to order:\n\nItem: ${itemName}\nSize: ${size}\nPrice: Rs. ${price}\n\nPlease contact me to confirm my order.`;
+            emailBtn.href = `mailto:awaisaziz8832@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Show modal
+            modal.style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('orderModal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('orderModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
         // Language dropdown functionality
         document.querySelector('.lang-btn').addEventListener('click', function() {
             const dropdown = document.querySelector('.lang-dropdown');
@@ -829,17 +1060,18 @@
         // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#')) {
+                // For internal links (starting with #), prevent default and scroll smoothly
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                } else {
-                    window.location.href = targetId;
                 }
+                // For external links (like index.html, about.html, contact.html)
+                // Let the browser handle them normally
             });
         });
     </script>
