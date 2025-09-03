@@ -3,33 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>South Punjab Spice Delight - Pizza & Burgers</title>
+    <title>South Punjab Spice Delight - Premium Pizza & Burgers</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
         :root {
-            --primary: #8B0000;
-            --secondary: #FF8C00;
-            --accent: #B22222;
-            --dark: #2C1E1E;
-            --light: #FFF5F5;
-            --gold: #FFD700;
-            --text: #FFF;
-            --success: #27ae60;
+            --primary: #9D2235;
+            --secondary: #E6C229;
+            --accent: #C41E3A;
+            --dark: #1A1A1A;
+            --light: #F8F8F8;
+            --text: #333333;
+            --gray: #777777;
+            --gold: #D4AF37;
+            --success: #2E8B57;
+            --transition: all 0.3s ease;
         }
 
         body {
-            background-color: #2C1E1E;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
             color: var(--text);
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
         }
 
         .container {
@@ -41,13 +50,22 @@
 
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            background: rgba(26, 26, 26, 0.95);
             color: white;
             padding: 15px 0;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(26, 26, 26, 0.98);
         }
 
         .header-content {
@@ -70,7 +88,6 @@
         .logo h1 {
             font-size: 1.8rem;
             font-weight: 700;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .logo span {
@@ -80,7 +97,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 35px;
         }
 
         nav a {
@@ -88,7 +105,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             position: relative;
             padding: 5px 0;
         }
@@ -101,7 +118,7 @@
             bottom: 0;
             left: 0;
             background-color: var(--gold);
-            transition: width 0.3s ease;
+            transition: var(--transition);
         }
 
         nav a:hover:after {
@@ -119,7 +136,7 @@
         }
 
         .lang-btn {
-            background: linear-gradient(to bottom, var(--gold), #daa520);
+            background: linear-gradient(to bottom, var(--gold), #C99A05);
             color: var(--dark);
             border: none;
             padding: 10px 20px;
@@ -129,13 +146,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: var(--transition);
         }
 
         .lang-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
         }
 
         .lang-btn i {
@@ -150,22 +167,34 @@
             background: white;
             min-width: 160px;
             border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             z-index: 1;
             margin-top: 10px;
             overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .lang-dropdown a {
             color: var(--dark);
-            padding: 12px 16px;
+            padding: 12px 20px;
             text-decoration: none;
             display: block;
-            transition: background 0.3s ease;
+            transition: var(--transition);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .lang-dropdown a:last-child {
+            border-bottom: none;
         }
 
         .lang-dropdown a:hover {
-            background: var(--light);
+            background: #f9f9f9;
+            padding-left: 25px;
         }
 
         .language-selector:hover .lang-dropdown {
@@ -174,59 +203,99 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 180px 20px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(157, 34, 53, 0.3) 0%, rgba(196, 30, 58, 0.3) 100%);
+            z-index: 0;
         }
 
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h2 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            font-family: 'Montserrat', sans-serif;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeUp 1s ease;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .btn {
             display: inline-block;
-            background: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--accent));
             color: white;
-            padding: 14px 32px;
+            padding: 16px 36px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
             margin: 10px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(157, 34, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            background: var(--secondary);
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 20px rgba(157, 34, 53, 0.5);
         }
 
         .btn-outline {
             background: transparent;
             border: 2px solid white;
+            box-shadow: none;
         }
 
         .btn-outline:hover {
@@ -234,54 +303,74 @@
             color: var(--primary);
         }
 
+        .hero-buttons {
+            animation: fadeUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
         /* Features Section */
         .features {
-            padding: 80px 0;
-            background: var(--dark);
+            padding: 100px 0;
+            background: white;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--text);
+            font-size: 2.8rem;
+            color: var(--dark);
             margin-bottom: 15px;
-            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
         }
 
         .section-title p {
-            color: #ccc;
-            font-size: 1.1rem;
+            color: var(--gray);
+            font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto;
+            margin: 25px auto 0;
         }
 
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 40px;
         }
 
         .feature-card {
-            background: rgba(139, 0, 0, 0.2);
-            border-radius: 10px;
+            background: white;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            top: 0;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .feature-img {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
+            position: relative;
         }
 
         .feature-img img {
@@ -296,63 +385,86 @@
         }
 
         .feature-content {
-            padding: 20px;
+            padding: 25px;
         }
 
         .feature-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--text);
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: var(--dark);
         }
 
         .feature-content p {
-            color: #ccc;
-            margin-bottom: 15px;
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 1rem;
         }
 
         .price {
-            color: var(--gold);
+            color: var(--primary);
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 20px;
         }
 
         /* Special Offers */
         .offers {
             background: linear-gradient(to right, var(--primary), var(--accent));
-            padding: 80px 0;
+            padding: 100px 0;
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offers::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
         }
 
         .offers .section-title h2 {
             color: white;
         }
 
+        .offers .section-title p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
         .offer-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
         }
 
         .offer-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .offer-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .offer-card i {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
             color: var(--gold);
         }
 
@@ -362,15 +474,15 @@
         }
 
         .offer-card p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             opacity: 0.9;
+            font-size: 1.1rem;
         }
 
         /* Testimonials */
         .testimonials {
-            padding: 80px 0;
-            background: var(--light);
-            color: var(--dark);
+            padding: 100px 0;
+            background: #f9f9f9;
         }
 
         .testimonial-grid {
@@ -381,27 +493,42 @@
 
         .testimonial-card {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
             cursor: pointer;
+            position: relative;
         }
 
         .testimonial-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            font-family: 'Playfair Display', serif;
+            color: rgba(157, 34, 53, 0.1);
+            line-height: 1;
         }
 
         .testimonial-card .rating {
-            color: var(--secondary);
+            color: var(--gold);
             font-size: 1.2rem;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .testimonial-card p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-style: italic;
-            color: #555;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
         .customer {
@@ -411,18 +538,20 @@
         }
 
         .customer img {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             object-fit: cover;
+            border: 3px solid var(--gold);
         }
 
         .customer-info h4 {
             color: var(--dark);
+            margin-bottom: 5px;
         }
 
         .customer-info p {
-            color: #777;
+            color: var(--gray);
             font-style: normal;
             font-size: 0.9rem;
             margin: 0;
@@ -432,26 +561,49 @@
         footer {
             background: var(--dark);
             color: white;
-            padding: 60px 0 30px;
-            border-top: 2px solid var(--primary);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 50px;
+            margin-bottom: 50px;
         }
 
         .footer-column h3 {
             font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
+            margin-bottom: 25px;
+            color: var(--gold);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
         }
 
         .footer-column p, .footer-column li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             opacity: 0.8;
+            line-height: 1.7;
         }
 
         .footer-column ul {
@@ -461,20 +613,20 @@
         .footer-column a {
             color: white;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition);
         }
 
         .footer-column a:hover {
-            color: var(--secondary);
-            text-decoration: underline;
+            color: var(--gold);
+            padding-left: 5px;
         }
 
         .contact-link {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
+            gap: 12px;
+            margin-bottom: 15px;
+            transition: var(--transition);
             color: white;
             text-decoration: none;
         }
@@ -486,18 +638,18 @@
         .social-links {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .social-links a:hover {
@@ -514,6 +666,16 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 3.2rem;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -526,19 +688,54 @@
                 justify-content: center;
             }
             
+            .hero {
+                padding: 150px 20px 100px;
+            }
+            
             .hero h2 {
                 font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
             }
             
             .feature-grid, .offer-cards, .testimonial-grid, .footer-content {
                 grid-template-columns: 1fr;
             }
+            
+            .section-title h2 {
+                font-size: 2.3rem;
+            }
+        }
+
+        /* Animation utilities */
+        .fade-in {
+            animation: fadeIn 1s ease;
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 1s ease;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 1s ease;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
 <body>
     <!-- Header Section -->
-    <header>
+    <header id="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
@@ -555,12 +752,12 @@
                 </nav>
                 <div class="language-selector">
                     <button class="lang-btn">
-                        <i class="fas fa-globe"></i> <span id="current-lang">English</span>
+                        <i class="fas fa-globe"></i> English
                     </button>
                     <div class="lang-dropdown">
-                        <a href="#" onclick="changeLanguage('english')">English</a>
-                        <a href="#" onclick="changeLanguage('urdu')">Urdu</a>
-                        <a href="#" onclick="changeLanguage('saraiki')">Saraiki</a>
+                        <a href="#">English</a>
+                        <a href="#">Urdu</a>
+                        <a href="#">Saraiki</a>
                     </div>
                 </div>
             </div>
@@ -571,11 +768,11 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h2 id="hero-title">Authentic South Punjab Flavors</h2>
-                <p id="hero-text">Experience the taste of South Punjab with our handcrafted pizzas and juicy burgers. Made with local spices and fresh ingredients.</p>
+                <h2>Authentic South Punjab Flavors</h2>
+                <p>Experience the taste of South Punjab with our handcrafted pizzas and juicy burgers. Made with local spices and fresh ingredients.</p>
                 <div class="hero-buttons">
-                    <a href="#order" class="btn" id="order-btn">Order Now</a>
-                    <a href="menu.html" class="btn btn-outline" id="menu-btn">View Menu</a>
+                    <a href="#order" class="btn">Order Now</a>
+                    <a href="#menu" class="btn btn-outline">View Menu</a>
                 </div>
             </div>
         </div>
@@ -585,40 +782,40 @@
     <section class="features" id="menu">
         <div class="container">
             <div class="section-title">
-                <h2 id="menu-title">Our Specialties</h2>
-                <p id="menu-subtitle">Discover our most popular dishes that customers love</p>
+                <h2>Our Specialties</h2>
+                <p>Discover our most popular dishes that customers love</p>
             </div>
             <div class="feature-grid">
-                <div class="feature-card">
+                <div class="feature-card slide-in-left">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Spicy Pepperoni Pizza">
                     </div>
                     <div class="feature-content">
                         <h3>Spicy Pepperoni Pizza</h3>
                         <p>Classic pizza with spicy pepperoni, mozzarella cheese, and our signature tomato sauce with South Punjab spices.</p>
-                        <p class="price">Rs. 1,299</p>
+                        <span class="price">Rs. 1,299</span>
                         <a href="contact.html" class="btn">Order Now</a>
                     </div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Chapli Burger">
                     </div>
                     <div class="feature-content">
                         <h3>Chapli Burger</h3>
                         <p>Juicy chapli kebab patty with fresh lettuce, tomato, onion, and our special sauce in a brioche bun.</p>
-                        <p class="price">Rs. 499</p>
+                        <span class="price">Rs. 499</span>
                         <a href="contact.html" class="btn">Order Now</a>
                     </div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card slide-in-right">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tandoori Pizza">
                     </div>
                     <div class="feature-content">
                         <h3>Tandoori Pizza</h3>
                         <p>Grilled chicken, red onions, cilantro, and tangy BBQ sauce with traditional South Punjab spices on a thin crust.</p>
-                        <p class="price">Rs. 1,499</p>
+                        <span class="price">Rs. 1,499</span>
                         <a href="contact.html" class="btn">Order Now</a>
                     </div>
                 </div>
@@ -630,29 +827,29 @@
     <section class="offers" id="offers">
         <div class="container">
             <div class="section-title">
-                <h2 id="offers-title">Special Offers</h2>
-                <p id="offers-subtitle">Take advantage of our limited-time deals and discounts</p>
+                <h2>Special Offers</h2>
+                <p>Take advantage of our limited-time deals and discounts</p>
             </div>
             <div class="offer-cards">
                 <div class="offer-card">
                     <i class="fas fa-pizza-slice"></i>
                     <h3>Family Deal</h3>
                     <p>2 Large Pizzas + Garlic Bread + 1.5L Drink</p>
-                    <p class="price">Rs. 2,499</p>
+                    <span class="price">Rs. 2,499</span>
                     <a href="contact.html" class="btn">Order Now</a>
                 </div>
                 <div class="offer-card">
                     <i class="fas fa-hamburger"></i>
                     <h3>Burger Combo</h3>
                     <p>2 Burgers + Fries + 2 Drinks</p>
-                    <p class="price">Rs. 899</p>
+                    <span class="price">Rs. 899</span>
                     <a href="contact.html" class="btn">Order Now</a>
                 </div>
                 <div class="offer-card">
                     <i class="fas fa-gift"></i>
                     <h3>Weekend Special</h3>
                     <p>20% OFF on all orders above Rs. 2,000</p>
-                    <p class="price">Use code: WEEKEND20</p>
+                    <span class="price">Use code: WEEKEND20</span>
                     <a href="contact.html" class="btn">Order Now</a>
                 </div>
             </div>
@@ -663,8 +860,8 @@
     <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="section-title">
-                <h2 id="testimonials-title">Customer Reviews</h2>
-                <p id="testimonials-subtitle">See what our customers are saying about us</p>
+                <h2>Customer Reviews</h2>
+                <p>See what our customers are saying about us</p>
             </div>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
@@ -770,49 +967,15 @@
     </footer>
 
     <script>
-        // Language switching functionality
-        function changeLanguage(lang) {
-            if (lang === 'english') {
-                document.getElementById('hero-title').textContent = "Authentic South Punjab Flavors";
-                document.getElementById('hero-text').textContent = "Experience the taste of South Punjab with our handcrafted pizzas and juicy burgers. Made with local spices and fresh ingredients.";
-                document.getElementById('order-btn').textContent = "Order Now";
-                document.getElementById('menu-btn').textContent = "View Menu";
-                document.getElementById('menu-title').textContent = "Our Specialties";
-                document.getElementById('menu-subtitle').textContent = "Discover our most popular dishes that customers love";
-                document.getElementById('offers-title').textContent = "Special Offers";
-                document.getElementById('offers-subtitle').textContent = "Take advantage of our limited-time deals and discounts";
-                document.getElementById('testimonials-title').textContent = "Customer Reviews";
-                document.getElementById('testimonials-subtitle').textContent = "See what our customers are saying about us";
-                document.getElementById('current-lang').textContent = "English";
-            } else if (lang === 'urdu') {
-                document.getElementById('hero-title').textContent = "اصلی جنوبی پنجاب کے ذائقے";
-                document.getElementById('hero-text').textContent = "ہاتھ سے بنے ہوئے پیزا اور رس دار برگر کے ساتھ جنوبی پنجاب کے ذائقے کا تجربہ کریں۔ مقالی مصالحوں اور تازہ اجزاء سے تیار کیا گیا۔";
-                document.getElementById('order-btn').textContent = "ابھی آرڈر کریں";
-                document.getElementById('menu-btn').textContent = "مینو دیکھیں";
-                document.getElementById('menu-title').textContent = "ہماری مخصوص ڈشیں";
-                document.getElementById('menu-subtitle').textContent = "ہماری مقبول ترین ڈشیں دریافت کریں جو گاہک پسند کرتے ہیں";
-                document.getElementById('offers-title').textContent = "خصوصی پیشکشیں";
-                document.getElementById('offers-subtitle').textContent = "ہماری محدود وقت کی ڈیلز اور رعایتوں سے فائدہ اٹھائیں";
-                document.getElementById('testimonials-title').textContent = "گاہک کے جائزے";
-                document.getElementById('testimonials-subtitle').textContent = "دیکھیں کہ ہمارے گاہک ہمارے بارے میں کیا کہہ رہے ہیں";
-                document.getElementById('current-lang').textContent = "اردو";
-            } else if (lang === 'saraiki') {
-                document.getElementById('hero-title').textContent = "اصلی جنوبی پنجاب دے ذائقے";
-                document.getElementById('hero-text').textContent = "ہتھ نال بݨائے ڳئے پیزا تے رسیلے برگراں نال جنوبی پنجاب دے ذائقے دا تجربہ کرو۔ مقامی مصالحے تے تازہ اجزاء نال تیار کیتا ڳیا۔";
-                document.getElementById('order-btn').textContent = "ہݨ آرڈر کرو";
-                document.getElementById('menu-btn').textContent = "مینو ݙیکھو";
-                document.getElementById('menu-title').textContent = "ساݙیاں مخصوص ڈشاں";
-                document.getElementById('menu-subtitle').textContent = "ساݙیاں مقبول ترین ڈشاں دریافت کرو جو گاہک پسند کریندن";
-                document.getElementById('offers-title').textContent = "خصوصی پیشکشاں";
-                document.getElementById('offers-subtitle').textContent = "ساݙیاں محدود وقت دیاں ڈیلاں تے رعایتاں توں فائدہ چاؤ";
-                document.getElementById('testimonials-title').textContent = "گاہک دے جائزے";
-                document.getElementById('testimonials-subtitle').textContent = "ݙیکھو جو ساݙے گاہک اساݙے بارے کیاہ آہدے پن";
-                document.getElementById('current-lang').textContent = "سرائیکی";
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-            
-            // Close the dropdown
-            document.querySelector('.lang-dropdown').style.display = 'none';
-        }
+        });
 
         // Language dropdown functionality
         document.querySelector('.lang-btn').addEventListener('click', function() {
@@ -833,44 +996,34 @@
         // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                // For internal links (starting with #), prevent default and scroll smoothly
-                if (this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-                // For external links (like menu.html, about.html, contact.html)
-                // Let the browser handle them normally
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
             });
         });
 
-        // Add active class to navigation links on scroll
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('nav a');
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .offer-card, .testimonial-card');
             
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
                 
-                if (pageYOffset >= sectionTop - 100) {
-                    current = section.getAttribute('id');
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
                 }
             });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
+        }
+
+        // Initialize animations
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
