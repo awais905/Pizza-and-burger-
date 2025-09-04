@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Order - Pizza & Burger</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #e74c3c;
+            --secondary: #f39c12;
+            --accent: #c0392b;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --text: #333333;
+            --gray: #95a5a6;
+            --success: #27ae60;
+            --gold: #ffd700;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span:first-child {
+            color: #ffcc00;
+        }
+        
+        .logo span:last-child {
+            color: #fff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Hero Section */
+        .order-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .order-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .order-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Order Process Steps */
+        .order-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .order-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 15px;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--secondary);
+        }
+        
+        .step.active .step-number {
+            background: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+        
+        .step-text {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .step.active .step-text {
+            color: var(--primary);
+        }
+        
+        /* Order Form */
+        .order-form-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+        
+        .form-section {
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        /* Menu Items Selection */
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .menu-item {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-item.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        
+        .menu-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        
+        .item-details {
+            padding: 15px;
+        }
+        
+        .item-details h3 {
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        .item-details p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .item-price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .payment-method {
+            border: 2px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--secondary);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary);
+            background: rgba(231, 76, 60, 0.05);
+        }
+        
+        .payment-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .payment-method.selected .payment-icon {
+            color: var(--primary);
+        }
+        
+        .payment-details {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        /* Order Summary */
+        .order-summary {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #ddd;
+        }
+        
+        /* Navigation Buttons */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: #e67e22;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        /* Confirmation Message */
+        .confirmation-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .confirmation-icon {
+            font-size: 80px;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+        
+        .confirmation-message h2 {
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+        }
+        
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .order-steps {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            
+            .order-steps::before {
+                display: none;
+            }
+            
+            .order-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .order-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-pizza-slice"></i>
+                    <span>Pizza</span> & <span>Burger</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="order.html" class="active">Order Online</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="order-hero">
+        <div class="container">
+            <h1>Online Ordering</h1>
+            <p>Order your favorite pizza and burger from the comfort of your home</p>
+        </div>
+    </section>
+
+    <!-- Order Steps -->
+    <div class="container">
+        <div class="order-steps">
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-text">Select Items</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-text">Delivery Info</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-text">Payment</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-text">Confirmation</div>
+            </div>
+        </div>
+
+        <!-- Order Form -->
+        <div class="order-form-container">
+            <!-- Step 1: Menu Selection -->
+            <div class="form-section active" id="step-1">
+                <h2 class="section-title">Select Your Items</h2>
+                
+                <div class="menu-items">
+                    <!-- Pizza Items -->
+                    <div class="menu-item" data-id="1" data-name="Margherita Pizza" data-price="850">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza">
+                        <div class="item-details">
+                            <h3>Margherita Pizza</h3>
+                            <p>Classic pizza with tomato sauce, mozzarella, and fresh basil</p>
+                            <span class="item-price">Rs. 850</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="number" class="quantity-input" value="0" min="0">
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item" data-id="2" data-name="Pepperoni Pizza" data-price="950">
+                        <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pepperoni Pizza">
+                        <div class="item-details">
+                            <h3>Pepperoni Pizza</h3>
+                            <p>Spicy pepperoni, mozzarella, and tomato sauce</p>
+                            <span class="item-price">Rs. 950</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="number" class="quantity-input" value="0" min="0">
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Burger Items -->
+                    <div class="menu-item" data-id="3" data-name="Classic Beef Burger" data-price="550">
+                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Classic Beef Burger">
+                        <div class="item-details">
+                            <h3>Classic Beef Burger</h3>
+                            <p>Juicy beef patty with lettuce, tomato, and special sauce</p>
+                            <span class="item-price">Rs. 550</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="number" class="quantity-input" value="0" min="0">
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item" data-id="4" data-name="Chicken Burger" data-price="500">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chicken Burger">
+                        <div class="item-details">
+                            <h3>Chicken Burger</h3>
+                            <p>Crispy chicken fillet with mayo and fresh vegetables</p>
+                            <span class="item-price">Rs. 500</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="number" class="quantity-input" value="0" min="0">
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-navigation">
+                    <div></div> <!-- Empty div for spacing -->
+                    <button class="btn btn-primary next-step">Continue to Delivery</button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Delivery Information -->
+            <div class="form-section" id="step-2">
+                <h2 class="section-title">Delivery Information</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="area">Area</label>
+                        <select id="area" name="area" required>
+                            <option value="">Select Area</option>
+                            <option value="shahjmal">Shahjmal</option>
+                            <option value="mondka">Mondka</option>
+                            <option value="shahgarh">Shahgarh</option>
+                            <option value="khangarh">Khangarh</option>
+                            <option value="muzaffargarh">Muzaffargarh</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="instructions">Delivery Instructions (Optional)</label>
+                        <input type="text" id="instructions" name="instructions" placeholder="e.g., Call before arrival">
+                    </div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button class="btn btn-outline prev-step">Back to Menu</button>
+                    <button class="btn btn-primary next-step">Continue to Payment</button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Payment -->
+            <div class="form-section" id="step-3">
+                <h2 class="section-title">Payment Method</h2>
+                
+                <div class="payment-methods">
+                    <div class="payment-method" data-method="jazzcash">
+                        <div class="payment-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>JazzCash</h3>
+                        <p>Pay via JazzCash</p>
+                    </div>
+                    
+                    <div class="payment-method" data-method="easypaisa">
+                        <div class="payment-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3>EasyPaisa</h3>
+                        <p>Pay via EasyPaisa</p>
+                    </div>
+                </div>
+                
+                <div class="payment-details">
+                    <h3>Payment Instructions</h3>
+                    <p>Please send your payment to the following number:</p>
+                    <div class="payment-number">
+                        <h4>03080432842</h4>
+                    </div>
+                    <p>After making the payment, please provide the transaction ID below:</p>
+                    
+                    <div class="form-group">
+                        <label for="transaction-id">Transaction ID</label>
+                        <input type="text" id="transaction-id" name="transaction-id" required>
+                    </div>
+                </div>
+                
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-items">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span id="order-total">Rs. 0</span>
+                    </div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button class="btn btn-outline prev-step">Back to Delivery</button>
+                    <button class="btn btn-primary" id="place-order">Place Order</button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Confirmation -->
+            <div class="form-section" id="step-4">
+                <div class="confirmation-message">
+                    <div class="confirmation-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Order Confirmed!</h2>
+                    <p>Thank you for your order. Your food is being prepared and will be delivered soon.</p>
+                    <p>Your order ID: <strong>PB-2023-<span id="order-id"></span></strong></p>
+                    <p>We'll send you updates on your phone number.</p>
+                    <br>
+                    <a href="menu.html" class="btn">Back to Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pizza & Burger</h3>
+                    <p>Serving the best pizza and burgers in South Punjab since 2010. Made with fresh ingredients and local spices.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="menu.html">Menu</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Main Market, Shahjmal, Punjab, Pakistan</p>
+                    <p>03080432842</p>
+                    <p>awaisaziz8832@gmail.com</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/923080432842"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Pizza & Burger. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Order data
+            let orderData = {
+                items: [],
+                customerInfo: {},
+                paymentMethod: '',
+                transactionId: '',
+                total: 0
+            };
+            
+            // Step navigation
+            const steps = document.querySelectorAll('.step');
+            const formSections = document.querySelectorAll('.form-section');
+            let currentStep = 1;
+            
+            // Update steps UI
+            function updateSteps() {
+                steps.forEach(step => {
+                    const stepNum = parseInt(step.getAttribute('data-step'));
+                    if (stepNum === currentStep) {
+                        step.classList.add('active');
+                    } else {
+                        step.classList.remove('active');
+                    }
+                });
+                
+                formSections.forEach(section => {
+                    const sectionId = section.getAttribute('id');
+                    if (sectionId === `step-${currentStep}`) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Next step button
+            document.querySelectorAll('.next-step').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (validateStep(currentStep)) {
+                        currentStep++;
+                        updateSteps();
+                        
+                        // If moving to payment step, update order summary
+                        if (currentStep === 3) {
+                            updateOrderSummary();
+                        }
+                    }
+                });
+            });
+            
+            // Previous step button
+            document.querySelectorAll('.prev-step').forEach(button => {
+                button.addEventListener('click', function() {
+                    currentStep--;
+                    updateSteps();
+                });
+            });
+            
+            // Validate current step
+            function validateStep(step) {
+                if (step === 1) {
+                    // Check if at least one item is selected
+                    const selectedItems = orderData.items.filter(item => item.quantity > 0);
+                    if (selectedItems.length === 0) {
+                        alert('Please select at least one item to continue.');
+                        return false;
+                    }
+                    return true;
+                } else if (step === 2) {
+                    // Validate delivery form
+                    const name = document.getElementById('name').value;
+                    const phone = document.getElementById('phone').value;
+                    const address = document.getElementById('address').value;
+                    const area = document.getElementById('area').value;
+                    
+                    if (!name || !phone || !address || !area) {
+                        alert('Please fill all required fields.');
+                        return false;
+                    }
+                    
+                    // Save customer info
+                    orderData.customerInfo = {
+                        name,
+                        phone,
+                        address,
+                        area,
+                        instructions: document.getElementById('instructions').value
+                    };
+                    
+                    return true;
+                } else if (step === 3) {
+                    // Validate payment
+                    if (!orderData.paymentMethod) {
+                        alert('Please select a payment method.');
+                        return false;
+                    }
+                    
+                    const transactionId = document.getElementById('transaction-id').value;
+                    if (!transactionId) {
+                        alert('Please enter your transaction ID.');
+                        return false;
+                    }
+                    
+                    orderData.transactionId = transactionId;
+                    
+                    return true;
+                }
+                
+                return true;
+            }
+            
+            // Menu item selection
+            document.querySelectorAll('.menu-item').forEach(item => {
+                const plusBtn = item.querySelector('.plus');
+                const minusBtn = item.querySelector('.minus');
+                const quantityInput = item.querySelector('.quantity-input');
+                
+                plusBtn.addEventListener('click', function() {
+                    let quantity = parseInt(quantityInput.value);
+                    quantity++;
+                    quantityInput.value = quantity;
+                    updateItemInOrder(item, quantity);
+                });
+                
+                minusBtn.addEventListener('click', function() {
+                    let quantity = parseInt(quantityInput.value);
+                    if (quantity > 0) {
+                        quantity--;
+                        quantityInput.value = quantity;
+                        updateItemInOrder(item, quantity);
+                    }
+                });
+                
+                quantityInput.addEventListener('change', function() {
+                    let quantity = parseInt(this.value);
+                    if (isNaN(quantity) || quantity < 0) {
+                        quantity = 0;
+                        this.value = 0;
+                    }
+                    updateItemInOrder(item, quantity);
+                });
+            });
+            
+            // Update item in order data
+            function updateItemInOrder(item, quantity) {
+                const id = item.getAttribute('data-id');
+                const name = item.getAttribute('data-name');
+                const price = parseFloat(item.getAttribute('data-price'));
+                
+                // Find if item already exists in order
+                const existingItemIndex = orderData.items.findIndex(item => item.id === id);
+                
+                if (quantity > 0) {
+                    if (existingItemIndex >= 0) {
+                        // Update quantity
+                        orderData.items[existingItemIndex].quantity = quantity;
+                    } else {
+                        // Add new item
+                        orderData.items.push({
+                            id,
+                            name,
+                            price,
+                            quantity
+                        });
+                    }
+                    
+                    // Add selected class
+                    item.classList.add('selected');
+                } else {
+                    // Remove item if quantity is 0
+                    if (existingItemIndex >= 0) {
+                        orderData.items.splice(existingItemIndex, 1);
+                    }
+                    
+                    // Remove selected class
+                    item.classList.remove('selected');
+                }
+                
+                // Update total
+                updateTotal();
+            }
+            
+            // Update order total
+            function updateTotal() {
+                orderData.total = orderData.items.reduce((total, item) => {
+                    return total + (item.price * item.quantity);
+                }, 0);
+            }
+            
+            // Payment method selection
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => {
+                        m.classList.remove('selected');
+                    });
+                    
+                    this.classList.add('selected');
+                    orderData.paymentMethod = this.getAttribute('data-method');
+                });
+            });
+            
+            // Update order summary
+            function updateOrderSummary() {
+                const summaryItems = document.querySelector('.summary-items');
+                summaryItems.innerHTML = '';
+                
+                orderData.items.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    
+                    const summaryItem = document.createElement('div');
+                    summaryItem.classList.add('summary-item');
+                    summaryItem.innerHTML = `
+                        <span>${item.name} x ${item.quantity}</span>
+                        <span>Rs. ${itemTotal}</span>
+                    `;
+                    
+                    summaryItems.appendChild(summaryItem);
+                });
+                
+                document.getElementById('order-total').textContent = `Rs. ${orderData.total}`;
+            }
+            
+            // Place order
+            document.getElementById('place-order').addEventListener('click', function() {
+                if (validateStep(3)) {
+                    // Generate random order ID
+                    const orderId = Math.floor(1000 + Math.random() * 9000);
+                    document.getElementById('order-id').textContent = orderId;
+                    
+                    // Move to confirmation step
+                    currentStep = 4;
+                    updateSteps();
+                    
+                    // In a real application, you would send the order data to your server here
+                    console.log('Order placed:', orderData);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
