@@ -5,31 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - South Punjab Spice Delight</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
         :root {
-            --primary: #8B0000;
-            --secondary: #FF8C00;
-            --accent: #B22222;
-            --dark: #2C1E1E;
-            --light: #FFF5F5;
-            --gold: #FFD700;
-            --text: #FFF;
-            --success: #27ae60;
+            --primary: #9D2235;
+            --secondary: #E6C229;
+            --accent: #C41E3A;
+            --dark: #1A1A1A;
+            --light: #F8F8F8;
+            --text: #333333;
+            --gray: #777777;
+            --gold: #D4AF37;
+            --success: #2E8B57;
+            --transition: all 0.3s ease;
         }
 
         body {
-            background-color: #2C1E1E;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
             color: var(--text);
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
         }
 
         .container {
@@ -41,13 +50,22 @@
 
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            background: rgba(26, 26, 26, 0.95);
             color: white;
             padding: 15px 0;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(26, 26, 26, 0.98);
         }
 
         .header-content {
@@ -70,7 +88,6 @@
         .logo h1 {
             font-size: 1.8rem;
             font-weight: 700;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .logo span {
@@ -80,7 +97,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 35px;
         }
 
         nav a {
@@ -88,7 +105,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             position: relative;
             padding: 5px 0;
         }
@@ -101,7 +118,7 @@
             bottom: 0;
             left: 0;
             background-color: var(--gold);
-            transition: width 0.3s ease;
+            transition: var(--transition);
         }
 
         nav a:hover:after {
@@ -119,7 +136,7 @@
         }
 
         .lang-btn {
-            background: linear-gradient(to bottom, var(--gold), #daa520);
+            background: linear-gradient(to bottom, var(--gold), #C99A05);
             color: var(--dark);
             border: none;
             padding: 10px 20px;
@@ -129,13 +146,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: var(--transition);
         }
 
         .lang-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
         }
 
         .lang-btn i {
@@ -150,22 +167,34 @@
             background: white;
             min-width: 160px;
             border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             z-index: 1;
             margin-top: 10px;
             overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .lang-dropdown a {
             color: var(--dark);
-            padding: 12px 16px;
+            padding: 12px 20px;
             text-decoration: none;
             display: block;
-            transition: background 0.3s ease;
+            transition: var(--transition);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .lang-dropdown a:last-child {
+            border-bottom: none;
         }
 
         .lang-dropdown a:hover {
-            background: var(--light);
+            background: #f9f9f9;
+            padding-left: 25px;
         }
 
         .language-selector:hover .lang-dropdown {
@@ -177,56 +206,96 @@
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
-            padding: 80px 20px;
+            padding: 180px 20px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(157, 34, 53, 0.3) 0%, rgba(196, 30, 58, 0.3) 100%);
+            z-index: 0;
         }
 
         .contact-hero-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-hero h2 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            font-family: 'Montserrat', sans-serif;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeUp 1s ease;
         }
 
         .contact-hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .btn {
             display: inline-block;
-            background: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--accent));
             color: white;
-            padding: 14px 32px;
+            padding: 16px 36px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
             margin: 10px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(157, 34, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            background: var(--secondary);
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 20px rgba(157, 34, 53, 0.5);
         }
 
         .btn-outline {
             background: transparent;
             border: 2px solid white;
+            box-shadow: none;
         }
 
         .btn-outline:hover {
@@ -234,95 +303,176 @@
             color: var(--primary);
         }
 
+        .hero-buttons {
+            animation: fadeUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
         /* Contact Section */
         .contact-section {
-            padding: 80px 0;
-            background: var(--dark);
+            padding: 100px 0;
+            background: white;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--text);
+            font-size: 2.8rem;
+            color: var(--dark);
             margin-bottom: 15px;
-            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
         }
 
         .section-title p {
-            color: #ccc;
-            font-size: 1.1rem;
+            color: var(--gray);
+            font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto;
+            margin: 25px auto 0;
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 40px;
         }
 
         .contact-card {
-            background: rgba(139, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            top: 0;
+            border: 1px solid rgba(157, 34, 53, 0.1);
         }
 
         .contact-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .contact-card i {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .contact-card:hover i {
             color: var(--gold);
+            transform: scale(1.1);
         }
 
         .contact-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
-            color: var(--text);
+            color: var(--dark);
         }
 
         .contact-card p {
-            color: #ccc;
-            margin-bottom: 20px;
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
         }
 
         .contact-link {
             display: inline-block;
-            color: var(--gold);
+            color: var(--primary);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(157, 34, 53, 0.1);
         }
 
         .contact-link:hover {
-            color: var(--secondary);
-            text-decoration: underline;
+            color: white;
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Contact Form */
+        .form-section {
+            padding: 100px 0;
+            background: #f9f9f9;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(157, 34, 53, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
         }
 
         /* Map Section */
         .map-section {
-            padding: 60px 0;
-            background: var(--light);
-            color: var(--dark);
+            padding: 80px 0;
+            background: white;
         }
 
         .map-container {
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            height: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 450px;
         }
 
         .map-container iframe {
@@ -333,30 +483,36 @@
 
         /* Hours Section */
         .hours-section {
-            padding: 80px 0;
-            background: var(--dark);
+            padding: 100px 0;
+            background: #f9f9f9;
         }
 
         .hours-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
         }
 
         .hours-card {
-            background: rgba(139, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border: 1px solid rgba(157, 34, 53, 0.1);
+        }
+
+        .hours-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
         }
 
         .hours-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--text);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            color: var(--dark);
         }
 
         .hours-list {
@@ -366,9 +522,9 @@
         .hours-list li {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .hours-list li:last-child {
@@ -376,38 +532,116 @@
         }
 
         .day {
-            color: var(--text);
+            color: var(--dark);
+            font-weight: 500;
         }
 
         .time {
-            color: var(--gold);
+            color: var(--primary);
             font-weight: 600;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .accordion {
+            margin-top: 50px;
+        }
+
+        .accordion-item {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .accordion-header {
+            background: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover {
+            background: #f9f9f9;
+        }
+
+        .accordion-header h4 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin: 0;
+        }
+
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 300px;
+            padding: 20px;
+        }
+
+        .accordion-content p {
+            color: var(--gray);
+            line-height: 1.7;
         }
 
         /* Footer */
         footer {
             background: var(--dark);
             color: white;
-            padding: 60px 0 30px;
-            border-top: 2px solid var(--primary);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 50px;
+            margin-bottom: 50px;
         }
 
         .footer-column h3 {
             font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
+            margin-bottom: 25px;
+            color: var(--gold);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
         }
 
         .footer-column p, .footer-column li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             opacity: 0.8;
+            line-height: 1.7;
         }
 
         .footer-column ul {
@@ -417,20 +651,20 @@
         .footer-column a {
             color: white;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition);
         }
 
         .footer-column a:hover {
-            color: var(--secondary);
-            text-decoration: underline;
+            color: var(--gold);
+            padding-left: 5px;
         }
 
         .contact-info {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
+            gap: 12px;
+            margin-bottom: 15px;
+            transition: var(--transition);
             color: white;
             text-decoration: none;
         }
@@ -442,18 +676,18 @@
         .social-links {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .social-links a:hover {
@@ -470,6 +704,16 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-hero h2 {
+                font-size: 3.2rem;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -482,19 +726,58 @@
                 justify-content: center;
             }
             
+            .contact-hero {
+                padding: 150px 20px 100px;
+            }
+            
             .contact-hero h2 {
                 font-size: 2.5rem;
+            }
+            
+            .contact-hero p {
+                font-size: 1.1rem;
             }
             
             .contact-grid, .hours-grid, .footer-content {
                 grid-template-columns: 1fr;
             }
+            
+            .section-title h2 {
+                font-size: 2.3rem;
+            }
+            
+            .form-container {
+                padding: 30px;
+            }
+        }
+
+        /* Animation utilities */
+        .fade-in {
+            animation: fadeIn 1s ease;
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 1s ease;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 1s ease;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
 <body>
     <!-- Header Section -->
-    <header>
+    <header id="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
@@ -545,24 +828,67 @@
                 <p id="contact-subtitle">Choose your preferred method to get in touch with us</p>
             </div>
             <div class="contact-grid">
-                <div class="contact-card" onclick="window.location.href='https://wa.me/923080432842'">
+                <div class="contact-card slide-in-left" onclick="window.location.href='https://wa.me/923080432842'">
                     <i class="fab fa-whatsapp"></i>
                     <h3>WhatsApp</h3>
-                    <p>Message us directly on WhatsApp for quick responses</p>
+                    <p>Message us directly on WhatsApp for quick responses and instant ordering</p>
                     <a href="https://wa.me/923080432842" class="contact-link">+92 308 0432842</a>
                 </div>
-                <div class="contact-card" onclick="window.location.href='tel:+923080432842'">
+                <div class="contact-card fade-in" onclick="window.location.href='tel:+923080432842'">
                     <i class="fas fa-phone"></i>
                     <h3>Phone Call</h3>
-                    <p>Call us directly to place orders or make inquiries</p>
+                    <p>Call us directly to place orders or make inquiries about our menu</p>
                     <a href="tel:+923080432842" class="contact-link">+92 308 0432842</a>
                 </div>
-                <div class="contact-card" onclick="window.location.href='mailto:awaisaziz8832@gmail.com'">
+                <div class="contact-card slide-in-right" onclick="window.location.href='mailto:awaisaziz8832@gmail.com'">
                     <i class="fas fa-envelope"></i>
                     <h3>Email</h3>
-                    <p>Send us an email for inquiries or feedback</p>
+                    <p>Send us an email for catering inquiries, feedback, or special requests</p>
                     <a href="mailto:awaisaziz8832@gmail.com" class="contact-link">awaisaziz8832@gmail.com</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="form-title">Send us a Message</h2>
+                <p id="form-subtitle">Fill out the form below and we'll get back to you as soon as possible</p>
+            </div>
+            <div class="form-container">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="order">Place an Order</option>
+                            <option value="catering">Catering Service</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="complaint">Complaint</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
@@ -603,6 +929,54 @@
                         <li><span class="day">Friday - Saturday</span> <span class="time">12 PM - 11 PM</span></li>
                         <li><span class="day">Sunday</span> <span class="time">12 PM - 10 PM</span></li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="faq-title">Frequently Asked Questions</h2>
+                <p id="faq-subtitle">Find answers to common questions about our restaurant</p>
+            </div>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>What areas do you deliver to?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We deliver to all areas within Shahjmal and surrounding neighborhoods. Delivery charges may vary based on distance. Contact us directly to confirm if we deliver to your location.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>How can I pay for my order?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We accept cash on delivery, bank transfers, and mobile payments. For online orders, we also accept credit/debit cards through secure payment gateways.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Do you offer catering services?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes, we offer catering services for events, parties, and corporate functions. Please contact us at least 48 hours in advance to discuss your catering needs and menu options.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Can I customize my pizza or burger?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Absolutely! We welcome customizations to suit your taste preferences. You can add or remove ingredients, choose your spice level, and request special preparations when placing your order.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -656,6 +1030,16 @@
     </footer>
 
     <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Language switching functionality
         function changeLanguage(lang) {
             if (lang === 'english') {
@@ -663,70 +1047,6 @@
                 document.getElementById('contact-hero-text').textContent = "We'd love to hear from you. Reach out to us through any of the following channels.";
                 document.getElementById('contact-title').textContent = "Contact Us";
                 document.getElementById('contact-subtitle').textContent = "Choose your preferred method to get in touch with us";
-                document.getElementById('location-title').textContent = "Our Location";
-                document.getElementById('location-subtitle').textContent = "Visit us at our restaurant in Shahjmal";
-                document.getElementById('hours-title').textContent = "Opening Hours";
-                document.getElementById('hours-subtitle').textContent = "We're open every day to serve you delicious food";
-                document.getElementById('current-lang').textContent = "English";
-            } else if (lang === 'urdu') {
-                document.getElementById('contact-hero-title').textContent = "رابطہ کریں";
-                document.getElementById('contact-hero-text').textContent = "ہم آپ سے سننا پسند کریں گے۔ درج ذیل میں سے کسی بھی چینل کے ذریعے ہم سے رابطہ کریں۔";
-                document.getElementById('contact-title').textContent = "ہم سے رابطہ کریں";
-                document.getElementById('contact-subtitle').textContent = "ہم سے رابطہ کرنے کے لیے اپنا پسندیدہ طریقہ منتخب کریں";
-                document.getElementById('location-title').textContent = "ہمارا مقام";
-                document.getElementById('location-subtitle').textContent = "شاہجمال میں ہمارے ریستوراں میں ہمیں ملنے آئیں";
-                document.getElementById('hours-title').textContent = "کھلنے کے اوقات";
-                document.getElementById('hours-subtitle').textContent = "ہم آپ کو مزیدار کھانا پیش کرنے کے لیے ہر روز کھلے ہیں";
-                document.getElementById('current-lang').textContent = "اردو";
-            } else if (lang === 'saraiki') {
-                document.getElementById('contact-hero-title').textContent = "رابطہ کرو";
-                document.getElementById('contact-hero-text').textContent = "اساں تہاݙی ڳالھ سڻݨ پسند کریسوں۔ درج ذیل وچوں کہیں وی چینل دے ذریعے اساں نال رابطہ کرو۔";
-                document.getElementById('contact-title').textContent = "اساں نال رابطہ کرو";
-                document.getElementById('contact-subtitle').textContent = "اساں نال رابطہ کرݨ کیتے اپݨا پسندیدہ طریقہ منتخب کرو";
-                document.getElementById('location-title').textContent = "ساݙا مقام";
-                document.getElementById('location-subtitle').textContent = "شاہجمال وچ ساݙے ریسٹورنٹ وچ اساں نال ملݨ آؤ";
-                document.getElementById('hours-title').textContent = "کھلݨ دے ویلھے";
-                document.getElementById('hours-subtitle').textContent = "اساں تہاکوں مزیدار کھانا پیش کرݨ کیتے ہر ݙینہہ کھلے ہیں";
-                document.getElementById('current-lang').textContent = "سرائیکی";
-            }
-            
-            // Close the dropdown
-            document.querySelector('.lang-dropdown').style.display = 'none';
-        }
-
-        // Language dropdown functionality
-        document.querySelector('.lang-btn').addEventListener('click', function() {
-            const dropdown = document.querySelector('.lang-dropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        });
-
-        // Close dropdown when clicking outside
-        window.addEventListener('click', function(e) {
-            if (!e.target.matches('.lang-btn')) {
-                const dropdown = document.querySelector('.lang-dropdown');
-                if (dropdown.style.display === 'block') {
-                    dropdown.style.display = 'none';
-                }
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                // For internal links (starting with #), prevent default and scroll smoothly
-                if (this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-                // For external links (like index.html, menu.html, about.html)
-                // Let the browser handle them normally
-            });
-        });
-    </script>
-</body>
-</html>
+                document.getElementById('form-title').textContent = "Send us a Message";
+                document.getElementById('form-subtitle').textContent = "Fill out the form below and we'll get back to you as soon as possible";
+                document.getElementById('location-title').textContent = "
