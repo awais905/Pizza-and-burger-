@@ -22,6 +22,9 @@
             --text: #333333;
             --gray: #95a5a6;
             --success: #27ae60;
+            --whatsapp: #25D366;
+            --call: #3498db;
+            --email: #9b59b6;
         }
         
         body {
@@ -43,6 +46,9 @@
             color: white;
             padding: 20px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .header-content {
@@ -63,7 +69,7 @@
         }
         
         .logo span:last-child {
-            color: #c0392b;
+            color: #fff;
         }
         
         nav ul {
@@ -84,7 +90,7 @@
             transition: background-color 0.3s;
         }
         
-        nav ul li a:hover {
+        nav ul li a:hover, nav ul li a.active {
             background-color: rgba(255, 255, 255, 0.2);
         }
         
@@ -149,6 +155,7 @@
             text-align: center;
             padding: 100px 20px;
             margin-bottom: 40px;
+            border-radius: 10px;
         }
         
         .hero h1 {
@@ -171,11 +178,122 @@
             border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
         
         .btn:hover {
             background-color: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Contact Cards Section */
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 5px solid;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact-card.whatsapp {
+            border-color: var(--whatsapp);
+        }
+        
+        .contact-card.call {
+            border-color: var(--call);
+        }
+        
+        .contact-card.email {
+            border-color: var(--email);
+        }
+        
+        .card-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            height: 80px;
+            width: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            color: white;
+        }
+        
+        .whatsapp .card-icon {
+            background-color: var(--whatsapp);
+        }
+        
+        .call .card-icon {
+            background-color: var(--call);
+        }
+        
+        .email .card-icon {
+            background-color: var(--email);
+        }
+        
+        .contact-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .contact-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .contact-card .number {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            max-width: 200px;
+        }
+        
+        .whatsapp .contact-btn {
+            background-color: var(--whatsapp);
+        }
+        
+        .call .contact-btn {
+            background-color: var(--call);
+        }
+        
+        .email .contact-btn {
+            background-color: var(--email);
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
         }
         
         /* Contact Section */
@@ -281,6 +399,7 @@
             font-size: 16px;
             font-weight: 600;
             transition: background-color 0.3s;
+            width: 100%;
         }
         
         button[type="submit"]:hover {
@@ -356,6 +475,7 @@
             color: white;
             padding: 40px 0;
             text-align: center;
+            margin-top: 50px;
         }
         
         .footer-content {
@@ -432,10 +552,11 @@
             nav ul {
                 margin-top: 15px;
                 justify-content: center;
+                flex-wrap: wrap;
             }
             
             nav ul li {
-                margin: 0 10px;
+                margin: 5px 10px;
             }
             
             .language-selector {
@@ -450,8 +571,12 @@
                 font-size: 1rem;
             }
             
-            .contact-section {
+            .contact-section, .contact-cards {
                 grid-template-columns: 1fr;
+            }
+            
+            .contact-card {
+                padding: 20px 15px;
             }
         }
     </style>
@@ -470,12 +595,12 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="menu.html">Menu</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html" style="background-color: rgba(255, 255, 255, 0.2);">Contact</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
                     </ul>
                 </nav>
                 <div class="language-selector">
                     <button class="language-btn">
-                        <i class="fas fa-globe"></i> English
+                        <i class="fas fa-globe"></i> <span id="current-language">English</span>
                     </button>
                     <div class="language-options">
                         <a href="#" onclick="changeLanguage('english')">English</a>
@@ -490,64 +615,103 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Get in Touch With Us</h1>
-            <p>Have questions, feedback, or want to place an order? We're here to help you with all your pizza and burger cravings!</p>
+            <h1 id="hero-title">Get in Touch With Us</h1>
+            <p id="hero-text">Have questions, feedback, or want to place an order? We're here to help you with all your pizza and burger cravings!</p>
             <a href="#contact-form" class="btn">Send us a Message</a>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Cards -->
     <div class="container">
+        <div class="contact-cards">
+            <div class="contact-card whatsapp">
+                <div class="card-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3 id="whatsapp-title">WhatsApp</h3>
+                <p id="whatsapp-text">Message us directly on WhatsApp for quick responses and instant ordering</p>
+                <span class="number">03080432842</span>
+                <a href="https://wa.me/923080432842" class="contact-btn" id="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Us
+                </a>
+            </div>
+            
+            <div class="contact-card call">
+                <div class="card-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h3 id="call-title">Call Us</h3>
+                <p id="call-text">Call us directly to place orders or make inquiries about our menu</p>
+                <span class="number">03080432842</span>
+                <a href="tel:03080432842" class="contact-btn" id="call-btn">
+                    <i class="fas fa-phone"></i> Call Now
+                </a>
+            </div>
+            
+            <div class="contact-card email">
+                <div class="card-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3 id="email-title">Email Us</h3>
+                <p id="email-text">Send us an email for catering inquiries, feedback, or special requests</p>
+                <span class="number">awaisaziz8832@gmail.com</span>
+                <a href="mailto:awaisaziz8832@gmail.com" class="contact-btn" id="email-btn">
+                    <i class="fas fa-envelope"></i> Send Email
+                </a>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
         <div class="contact-section">
             <div class="contact-info">
-                <h2>Contact Information</h2>
+                <h2 id="info-title">Contact Information</h2>
                 <div class="info-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
-                        <h3>Our Location</h3>
-                        <p>Main Market, Shahjmal, Punjab, Pakistan</p>
+                        <h3 id="location-title">Our Locations</h3>
+                        <p id="location-text">Shahjmal, Mondka, Shahgarh, Khangarh and Muzaffargarh</p>
                     </div>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-phone"></i>
                     <div>
-                        <h3>Phone Number</h3>
-                        <p>+92 308 0432842</p>
+                        <h3 id="phone-title">Phone Number</h3>
+                        <p>03080432842</p>
                     </div>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-envelope"></i>
                     <div>
-                        <h3>Email Address</h3>
+                        <h3 id="email-info-title">Email Address</h3>
                         <p>awaisaziz8832@gmail.com</p>
                     </div>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-clock"></i>
                     <div>
-                        <h3>Opening Hours</h3>
-                        <p>Monday-Sunday: 11:00 AM - 11:00 PM</p>
+                        <h3 id="hours-title">Opening Hours</h3>
+                        <p id="hours-text">Monday-Sunday: 11:00 AM - 11:00 PM</p>
                     </div>
                 </div>
             </div>
 
             <div class="form-container">
-                <h2>Send Us a Message</h2>
-                <form id="contact-form" action="https://formspree.io/f/mjvnzzwq" method="POST">
+                <h2 id="form-title">Send Us a Message</h2>
+                <form id="contact-form">
                     <div class="form-group">
-                        <label for="name">Your Name</label>
+                        <label for="name" id="name-label">Your Name</label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Your Email</label>
+                        <label for="email" id="email-label">Your Email</label>
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number</label>
+                        <label for="phone" id="phone-label">Phone Number</label>
                         <input type="tel" id="phone" name="phone">
                     </div>
                     <div class="form-group">
-                        <label for="subject">Subject</label>
+                        <label for="subject" id="subject-label">Subject</label>
                         <select id="subject" name="subject" required>
                             <option value="">Select a subject</option>
                             <option value="general">General Inquiry</option>
@@ -558,38 +722,38 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="message">Your Message</label>
+                        <label for="message" id="message-label">Your Message</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
-                    <button type="submit">Send Message</button>
+                    <button type="submit" id="submit-btn">Send Message</button>
                 </form>
             </div>
         </div>
 
         <!-- FAQ Section -->
         <div class="faq-section">
-            <h2>Frequently Asked Questions</h2>
+            <h2 id="faq-title">Frequently Asked Questions</h2>
             <div class="faq-item">
-                <h3><i class="fas fa-question-circle"></i> Where do you serve?</h3>
-                <p>We serve in Shahjmal, Mondka, Shahgarh, Khangarh, and Muzaffargarh. Delivery charges may vary based on distance.</p>
+                <h3><i class="fas fa-question-circle"></i> <span id="faq1-question">Where do you serve?</span></h3>
+                <p id="faq1-answer">We serve in Shahjmal, Mondka, Shahgarh, Khangarh, and Muzaffargarh. Delivery charges may vary based on distance.</p>
             </div>
             <div class="faq-item">
-                <h3><i class="fas fa-question-circle"></i> What are your delivery hours?</h3>
-                <p>We deliver from 12:00 PM to 10:00 PM every day. Orders after 10:00 PM will be delivered the next day.</p>
+                <h3><i class="fas fa-question-circle"></i> <span id="faq2-question">What are your delivery hours?</span></h3>
+                <p id="faq2-answer">We deliver from 12:00 PM to 10:00 PM every day. Orders after 10:00 PM will be delivered the next day.</p>
             </div>
             <div class="faq-item">
-                <h3><i class="fas fa-question-circle"></i> Do you offer catering services?</h3>
-                <p>Yes, we offer catering services for events and parties. Please contact us at least 48 hours in advance for large orders.</p>
+                <h3><i class="fas fa-question-circle"></i> <span id="faq3-question">Do you offer catering services?</span></h3>
+                <p id="faq3-answer">Yes, we offer catering services for events and parties. Please contact us at least 48 hours in advance for large orders.</p>
             </div>
             <div class="faq-item">
-                <h3><i class="fas fa-question-circle"></i> What payment methods do you accept?</h3>
-                <p>We accept cash on delivery, bank transfers, and mobile payments. Online payment options are coming soon.</p>
+                <h3><i class="fas fa-question-circle"></i> <span id="faq4-question">What payment methods do you accept?</span></h3>
+                <p id="faq4-answer">We accept cash on delivery, bank transfers, and mobile payments. Online payment options are coming soon.</p>
             </div>
         </div>
 
         <!-- Map Section -->
         <div class="map-section">
-            <h2>Find Us Here</h2>
+            <h2 id="map-title">Find Us Here</h2>
             <div class="map-container">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3477.50035493093!2d71.4714569753591!3d29.387241875255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x393b91b8a48dcd0f%3A0x41f1c28b156a8e0d!2sShahjmal%2C%20Dera%20Ghazi%20Khan%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1684567890123!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
             </div>
@@ -614,12 +778,12 @@
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <p>Main Market, Shahjmal, Punjab, Pakistan</p>
-                    <p>+92 308 0432842</p>
+                    <p>03080432842</p>
                     <p>awaisaziz8832@gmail.com</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/923080432842"><i class="fab fa-whatsapp"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
@@ -631,6 +795,168 @@
     </footer>
 
     <script>
+        // Language content
+        const languageContent = {
+            english: {
+                heroTitle: "Get in Touch With Us",
+                heroText: "Have questions, feedback, or want to place an order? We're here to help you with all your pizza and burger cravings!",
+                whatsappTitle: "WhatsApp",
+                whatsappText: "Message us directly on WhatsApp for quick responses and instant ordering",
+                whatsappBtn: "WhatsApp Us",
+                callTitle: "Call Us",
+                callText: "Call us directly to place orders or make inquiries about our menu",
+                callBtn: "Call Now",
+                emailTitle: "Email Us",
+                emailText: "Send us an email for catering inquiries, feedback, or special requests",
+                emailBtn: "Send Email",
+                infoTitle: "Contact Information",
+                locationTitle: "Our Locations",
+                locationText: "Shahjmal, Mondka, Shahgarh, Khangarh and Muzaffargarh",
+                phoneTitle: "Phone Number",
+                emailInfoTitle: "Email Address",
+                hoursTitle: "Opening Hours",
+                hoursText: "Monday-Sunday: 11:00 AM - 11:00 PM",
+                formTitle: "Send Us a Message",
+                nameLabel: "Your Name",
+                emailLabel: "Your Email",
+                phoneLabel: "Phone Number",
+                subjectLabel: "Subject",
+                messageLabel: "Your Message",
+                submitBtn: "Send Message",
+                faqTitle: "Frequently Asked Questions",
+                faq1Question: "Where do you serve?",
+                faq1Answer: "We serve in Shahjmal, Mondka, Shahgarh, Khangarh, and Muzaffargarh. Delivery charges may vary based on distance.",
+                faq2Question: "What are your delivery hours?",
+                faq2Answer: "We deliver from 12:00 PM to 10:00 PM every day. Orders after 10:00 PM will be delivered the next day.",
+                faq3Question: "Do you offer catering services?",
+                faq3Answer: "Yes, we offer catering services for events and parties. Please contact us at least 48 hours in advance for large orders.",
+                faq4Question: "What payment methods do you accept?",
+                faq4Answer: "We accept cash on delivery, bank transfers, and mobile payments. Online payment options are coming soon.",
+                mapTitle: "Find Us Here"
+            },
+            urdu: {
+                heroTitle: "ہم سے رابطہ کریں",
+                heroText: "سوالات، آراء، یا آرڈر دینا چاہتے ہیں؟ ہم آپ کی پیزا اور برگر کی تمام ضروریات میں مدد کے لیے موجود ہیں!",
+                whatsappTitle: "WhatsApp",
+                whatsappText: "فوری جوابات اور فوری آرڈر کے لیے ہمیں براہ راست WhatsApp پر میسج کریں",
+                whatsappBtn: "WhatsApp پر رابطہ کریں",
+                callTitle: "ہمیں کال کریں",
+                callText: "آرڈر دینے یا ہمارے مینو کے بارے میں inquiries کے لیے براہ راست کال کریں",
+                callBtn: "ابھی کال کریں",
+                emailTitle: "ہمیں ای میل کریں",
+                emailText: "کیٹرنگ inquiries، feedback، یا special requests کے لیے ہمیں ای میل بھیجیں",
+                emailBtn: "ای میل بھیجیں",
+                infoTitle: "رابطہ کی معلومات",
+                locationTitle: "ہمارے مقامات",
+                locationText: "شاہجمال، مونڈکا، شاہگڑھ، کھنگرہ اور مظفر گڑھ",
+                phoneTitle: "فون نمبر",
+                emailInfoTitle: "ای میل پتہ",
+                hoursTitle: "کھلنے کے اوقات",
+                hoursText: "سوموار سے اتوار: صبح 11 بجے سے رات 11 بجے تک",
+                formTitle: "ہمیں ایک پیغام بھیجیں",
+                nameLabel: "آپ کا نام",
+                emailLabel: "آپ کا ای میل",
+                phoneLabel: "فون نمبر",
+                subjectLabel: "موضوع",
+                messageLabel: "آپ کا پیغام",
+                submitBtn: "پیغام بھیجیں",
+                faqTitle: "اکثر پوچھے جانے والے سوالات",
+                faq1Question: "آپ کہاں تک سروس فراہم کرتے ہیں؟",
+                faq1Answer: "ہم شاہجمال، مونڈکا، شاہگڑھ، کھنگرہ اور مظفر گڑھ میں سروس فراہم کرتے ہیں۔ distance کے حساب سے ڈیلیوری چارجز مختلف ہو سکتے ہیں۔",
+                faq2Question: "آپ کے ڈیلیوری کے اوقات کیا ہیں؟",
+                faq2Answer: "ہم ہر دن دوپہر 12 بجے سے رات 10 بجے تک ڈیلیوری کرتے ہیں۔ رات 10 بجے کے بعد کے آرڈر اگلے دن ڈیلیور کیے جائیں گے۔",
+                faq3Question: "کیا آپ کیٹرنگ سروسز پیش کرتے ہیں؟",
+                faq3Answer: "جی ہاں، ہم تقریبات اور پارٹیوں کے لیے کیٹرنگ سروسز پیش کرتے ہیں۔ بڑے آرڈرز کے لیے براہ کرم کم از کم 48 گھنٹے پہلے ہم سے رابطہ کریں۔",
+                faq4Question: "آپ کون سے ادائیگی کے طریقے قبول کرتے ہیں؟",
+                faq4Answer: "ہم cash on delivery، bank transfers، اور mobile payments قبول کرتے ہیں۔ آن لائن ادائیگی کے اختیارات جلد ہی دستیاب ہوں گے۔",
+                mapTitle: "ہمیں یہاں تلاش کریں"
+            },
+            saraiki: {
+                heroTitle: "ساݙے نال رابطہ کرو",
+                heroText: "سوالات، رائے، یا آرڈر ݙیوݨ چاہندے او؟ اساں تہاݙی پیزا تے برگر دیاں تمام ضروریات وچ مدد کیتے موجود ہیں!",
+                whatsappTitle: "WhatsApp",
+                whatsappText: "فوری جوابات تے فوری آرڈر کیتے اساں直接 WhatsApp تے میسج کرو",
+                whatsappBtn: "WhatsApp تے رابطہ کرو",
+                callTitle: "اساں کال کرو",
+                callText: "آرڈر ݙیوݨ یا اساݙے مینو دے بارے inquiries کیتے直接 کال کرو",
+                callBtn: "ہݨ کال کرو",
+                emailTitle: "اساں ای میل کرو",
+                emailText: "کیٹرنگ inquiries، feedback، یا special requests کیتے اساں ای میل بھیڄو",
+                emailBtn: "ای میل بھیڄو",
+                infoTitle: "رابطہ دی معلومات",
+                locationTitle: "ساݙے مقامات",
+                locationText: "شاہجمال، مونڈکا، شاہگڑھ، کھنگرہ تے مظفر گڑھ",
+                phoneTitle: "فون نمبر",
+                emailInfoTitle: "ای میل پتہ",
+                hoursTitle: "کھلݨ دے اوقات",
+                hoursText: "سوموار توں اتوار: صبح 11 وجے توں رات 11 وجے تک",
+                formTitle: "اساں ہک پیغام بھیڄو",
+                nameLabel: "تہاݙا ناں",
+                emailLabel: "تہاݙا ای میل",
+                phoneLabel: "فون نمبر",
+                subjectLabel: "موضوع",
+                messageLabel: "تہاݙا پیغام",
+                submitBtn: "پیغام بھیڄو",
+                faqTitle: "اکثر پچھے ونڄݨ آلے سوالات",
+                faq1Question: "تساں کتھاں تک سروس فراہم کریندے او؟",
+                faq1Answer: "اساں شاہجمال، مونڈکا، شاہگڑھ، کھنگرہ تے مظفر گڑھ وچ سروس فراہم کریندے ہیں۔ distance دے حساب نال ڈیلیوری چارجز مختلف تھی سڳدے ہن۔",
+                faq2Question: "تہاݙے ڈیلیوری دے اوقات کیا ہن؟",
+                faq2Answer: "اساں ہر ݙینہہ دوپہر 12 وجے توں رات 10 وجے تک ڈیلیوری کریندے ہیں۔ رات 10 وجے دے بعد دے آرڈر اڳلے ݙینہہ ڈیلیور تھیسن۔",
+                faq3Question: "کیا تساں کیٹرنگ سروسز پیش کریندے او؟",
+                faq3Answer: "جیا ہاں، اساں تقریبات تے پارٹیوں کیتے کیٹرنگ سروسز پیش کریندے ہیں۔ وݙے آرڈرز کیتے براہ مہربانی گھٹ توں گھٹ 48 گھنٹے پہلے اساں نال رابطہ کرو۔",
+                faq4Question: "تساں کہڑے ادائیگی دے طریقے قبول کریندے او؟",
+                faq4Answer: "اساں cash on delivery، bank transfers، تے mobile payments قبول کریندے ہیں۔ آن لائن ادائیگی دے اختیارات جلد ہی دستیاب تھیسن۔",
+                mapTitle: "اساں ایں تے لبھو"
+            }
+        };
+
+        // Language change functionality
+        function changeLanguage(lang) {
+            const content = languageContent[lang];
+            if (!content) return;
+            
+            // Update all text elements
+            document.getElementById('current-language').textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
+            document.getElementById('hero-title').textContent = content.heroTitle;
+            document.getElementById('hero-text').textContent = content.heroText;
+            document.getElementById('whatsapp-title').textContent = content.whatsappTitle;
+            document.getElementById('whatsapp-text').textContent = content.whatsappText;
+            document.getElementById('whatsapp-btn').textContent = content.whatsappBtn;
+            document.getElementById('call-title').textContent = content.callTitle;
+            document.getElementById('call-text').textContent = content.callText;
+            document.getElementById('call-btn').textContent = content.callBtn;
+            document.getElementById('email-title').textContent = content.emailTitle;
+            document.getElementById('email-text').textContent = content.emailText;
+            document.getElementById('email-btn').textContent = content.emailBtn;
+            document.getElementById('info-title').textContent = content.infoTitle;
+            document.getElementById('location-title').textContent = content.locationTitle;
+            document.getElementById('location-text').textContent = content.locationText;
+            document.getElementById('phone-title').textContent = content.phoneTitle;
+            document.getElementById('email-info-title').textContent = content.emailInfoTitle;
+            document.getElementById('hours-title').textContent = content.hoursTitle;
+            document.getElementById('hours-text').textContent = content.hoursText;
+            document.getElementById('form-title').textContent = content.formTitle;
+            document.getElementById('name-label').textContent = content.nameLabel;
+            document.getElementById('email-label').textContent = content.emailLabel;
+            document.getElementById('phone-label').textContent = content.phoneLabel;
+            document.getElementById('subject-label').textContent = content.subjectLabel;
+            document.getElementById('message-label').textContent = content.messageLabel;
+            document.getElementById('submit-btn').textContent = content.submitBtn;
+            document.getElementById('faq-title').textContent = content.faqTitle;
+            document.getElementById('faq1-question').textContent = content.faq1Question;
+            document.getElementById('faq1-answer').textContent = content.faq1Answer;
+            document.getElementById('faq2-question').textContent = content.faq2Question;
+            document.getElementById('faq2-answer').textContent = content.faq2Answer;
+            document.getElementById('faq3-question').textContent = content.faq3Question;
+            document.getElementById('faq3-answer').textContent = content.faq3Answer;
+            document.getElementById('faq4-question').textContent = content.faq4Question;
+            document.getElementById('faq4-answer').textContent = content.faq4Answer;
+            document.getElementById('map-title').textContent = content.mapTitle;
+            
+            // Store selected language
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
         // Form submission handling
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -643,12 +969,6 @@
             alert('Thank you for your message! We will get back to you soon.');
             this.reset();
         });
-        
-        // Language change functionality
-        function changeLanguage(lang) {
-            alert(`Language changed to ${lang}. This is a demo - actual translation would be implemented with a proper i18n library.`);
-            // In a real implementation, you would change the page content based on the selected language
-        }
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -666,6 +986,21 @@
                     });
                 }
             });
+        });
+
+        // Check for stored language preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('selectedLanguage');
+            if (savedLanguage) {
+                changeLanguage(savedLanguage);
+            }
+            
+            // Check if we came from menu page with order intent
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('order') === 'true') {
+                document.getElementById('subject').value = 'order';
+                document.getElementById('message').textContent = 'I would like to place an order for:';
+            }
         });
     </script>
 </body>
