@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza & Burger - Home</title>
+    <title>Pizza & Burger - Complete Website</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -114,17 +114,6 @@
             color: var(--secondary);
         }
         
-        .auth-btn.signup {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .auth-btn.signup:hover {
-            background: white;
-            color: var(--primary);
-        }
-        
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
@@ -178,6 +167,20 @@
         .btn-outline:hover {
             background: white;
             color: var(--primary);
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, #ffd700, #ffcc00);
+            color: var(--dark);
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #ffcc00, #ffd700);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            color: var(--dark);
         }
         
         /* Features Section */
@@ -391,6 +394,109 @@
                 font-size: 2rem;
             }
         }
+        
+        /* Page Content Styles */
+        .page-content {
+            display: none;
+        }
+        
+        #home-page {
+            display: block;
+        }
+        
+        /* Login Form Popup */
+        .login-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .close-login {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .login-form h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -404,61 +510,112 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#" class="nav-link active" data-page="home-page">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="menu-page">Menu</a></li>
+                        <li><a href="#" class="nav-link" data-page="about-page">About</a></li>
+                        <li><a href="#" class="nav-link" data-page="contact-page">Contact</a></li>
+                        <li><a href="#" class="nav-link" data-page="order-page">Order Online</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="login.html" class="auth-btn login">Login</a>
-                    <a href="#" class="auth-btn signup">Sign Up</a>
+                    <a href="#" class="auth-btn login" id="login-btn">Login</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Home Page -->
+    <div id="home-page" class="page-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Best Pizza & Burgers in Town</h1>
+                <p>Experience the delicious taste of our handcrafted pizzas and juicy burgers made with fresh ingredients and served with love.</p>
+                <div>
+                    <a href="#" class="btn nav-link" data-page="menu-page">View Menu</a>
+                    <a href="#" class="btn btn-gold nav-link" data-page="order-page">Order Online</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
         <div class="container">
-            <h1>Best Pizza & Burgers in Town</h1>
-            <p>Experience the delicious taste of our handcrafted pizzas and juicy burgers made with fresh ingredients and served with love.</p>
-            <div>
-                <a href="menu.html" class="btn">View Menu</a>
-                <a href="order.html" class="btn btn-outline">Order Online</a>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Fast Delivery</h3>
+                    <p>Get your favorite food delivered to your doorstep in under 30 minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Fresh Ingredients</h3>
+                    <p>We use only the freshest ingredients to prepare your meals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3>Great Deals</h3>
+                    <p>Enjoy amazing deals and discounts on our delicious menu items.</p>
+                </div>
+            </div>
+
+            <!-- Menu Preview -->
+            <div class="menu-preview">
+                <h2 class="section-title">Our Popular Items</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza">
+                        <div class="menu-item-content">
+                            <h3>Margherita Pizza</h3>
+                            <p>Classic pizza with tomato sauce, mozzarella, and fresh basil</p>
+                            <span class="price">Rs. 850</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Classic Beef Burger">
+                        <div class="menu-item-content">
+                            <h3>Classic Beef Burger</h3>
+                            <p>Juicy beef patty with lettuce, tomato, and special sauce</p>
+                            <span class="price">Rs. 550</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pepperoni Pizza">
+                        <div class="menu-item-content">
+                            <h3>Pepperoni Pizza</h3>
+                            <p>Spicy pepperoni, mozzarella, and tomato sauce</p>
+                            <span class="price">Rs. 950</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chicken Burger">
+                        <div class="menu-item-content">
+                            <h3>Chicken Burger</h3>
+                            <p>Crispy chicken fillet with mayo and fresh vegetables</p>
+                            <span class="price">Rs. 500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta">
+                <h2>Ready to satisfy your cravings?</h2>
+                <p>Order now and get 15% off on your first order with code WELCOME15</p>
+                <a href="#" class="btn btn-gold nav-link" data-page="order-page">Order Now</a>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Features Section -->
-    <div class="container">
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-truck"></i>
-                </div>
-                <h3>Fast Delivery</h3>
-                <p>Get your favorite food delivered to your doorstep in under 30 minutes.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-utensils"></i>
-                </div>
-                <h3>Fresh Ingredients</h3>
-                <p>We use only the freshest ingredients to prepare your meals.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-tag"></i>
-                </div>
-                <h3>Great Deals</h3>
-                <p>Enjoy amazing deals and discounts on our delicious menu items.</p>
-            </div>
-        </div>
-
-        <!-- Menu Preview -->
-        <div class="menu-preview">
-            <h2 class="section-title">Our Popular Items</h2>
+    <!-- Other Pages (Simplified for demo) -->
+    <div id="menu-page" class="page-content">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
             <div class="menu-items">
                 <div class="menu-item">
                     <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza">
@@ -476,30 +633,89 @@
                         <span class="price">Rs. 550</span>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pepperoni Pizza">
-                    <div class="menu-item-content">
-                        <h3>Pepperoni Pizza</h3>
-                        <p>Spicy pepperoni, mozzarella, and tomato sauce</p>
-                        <span class="price">Rs. 950</span>
-                    </div>
+                <!-- More menu items would go here -->
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn btn-gold nav-link" data-page="order-page">Order Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="about-page" class="page-content">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
+                    At Pizza & Burger, we've been serving the best pizza and burgers in South Punjab since 2010. 
+                    Our passion for quality ingredients and authentic recipes has made us a favorite among locals 
+                    in Shahjmal, Mondka, Shahgarh, Khangarh, and Muzaffargarh.
+                </p>
+                <p style="font-size: 1.2rem; line-height: 1.8;">
+                    We believe that great food brings people together, and we're committed to creating memorable 
+                    dining experiences for our customers. Every pizza and burger is prepared with care and the 
+                    freshest ingredients available.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-page" class="page-content">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Get in Touch</h3>
+                <p style="margin-bottom: 15px;"><strong>Phone:</strong> 03080432842</p>
+                <p style="margin-bottom: 15px;"><strong>Email:</strong> awaisaziz8832@gmail.com</p>
+                <p style="margin-bottom: 20px;"><strong>Areas Served:</strong> Shahjmal, Mondka, Shahgarh, Khangarh, Muzaffargarh</p>
+                <p style="margin-bottom: 20px;"><strong>Hours:</strong> Monday-Sunday: 11:00 AM - 11:00 PM</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="order-page" class="page-content">
+        <div class="container">
+            <h2 class="section-title">Order Online</h2>
+            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Place Your Order</h3>
+                <p style="margin-bottom: 20px;">We accept orders via WhatsApp and phone call. Please contact us at:</p>
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <p style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">03080432842</p>
                 </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chicken Burger">
-                    <div class="menu-item-content">
-                        <h3>Chicken Burger</h3>
-                        <p>Crispy chicken fillet with mayo and fresh vegetables</p>
-                        <span class="price">Rs. 500</span>
-                    </div>
+                <p style="margin-bottom: 20px;">Payment Methods: JazzCash and EasyPaisa</p>
+                <div style="text-align: center;">
+                    <a href="https://wa.me/923080432842" class="btn" target="_blank" style="background-color: #25D366;">
+                        <i class="fab fa-whatsapp"></i> Order via WhatsApp
+                    </a>
+                    <a href="tel:03080432842" class="btn btn-gold">
+                        <i class="fas fa-phone"></i> Call to Order
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- CTA Section -->
-        <div class="cta">
-            <h2>Ready to satisfy your cravings?</h2>
-            <p>Order now and get 15% off on your first order with code WELCOME15</p>
-            <a href="order.html" class="btn">Order Now</a>
+    <!-- Login Popup -->
+    <div class="login-popup" id="login-popup">
+        <div class="login-container">
+            <span class="close-login" id="close-login">&times;</span>
+            <div class="login-form">
+                <h2>Login to Your Account</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#">Sign up</a></p>
+                    <p><a href="#">Forgot password?</a></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -513,11 +729,11 @@
                 </div>
                 <div class="footer-section">
                     <h3>Quick Links</h3>
-                    <a href="index.html">Home</a>
-                    <a href="menu.html">Menu</a>
-                    <a href="about.html">About Us</a>
-                    <a href="contact.html">Contact</a>
-                    <a href="login.html">Login</a>
+                    <a href="#" class="nav-link" data-page="home-page">Home</a>
+                    <a href="#" class="nav-link" data-page="menu-page">Menu</a>
+                    <a href="#" class="nav-link" data-page="about-page">About Us</a>
+                    <a href="#" class="nav-link" data-page="contact-page">Contact</a>
+                    <a href="#" class="nav-link" data-page="order-page">Order Online</a>
                 </div>
                 <div class="footer-section">
                     <h3>Contact Info</h3>
@@ -537,5 +753,56 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('data-page');
+                
+                // Hide all pages
+                document.querySelectorAll('.page-content').forEach(page => {
+                    page.style.display = 'none';
+                });
+                
+                // Show selected page
+                document.getElementById(pageId).style.display = 'block';
+                
+                // Update active navigation link
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        // Login popup functionality
+        document.getElementById('login-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('login-popup').style.display = 'flex';
+        });
+        
+        document.getElementById('close-login').addEventListener('click', function() {
+            document.getElementById('login-popup').style.display = 'none';
+        });
+        
+        // Close login popup when clicking outside
+        document.getElementById('login-popup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                document.getElementById('login-popup').style.display = 'none';
+            }
+        });
+        
+        // Login form submission
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Login functionality would be implemented here. In a real application, this would connect to a backend service.');
+            document.getElementById('login-popup').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
