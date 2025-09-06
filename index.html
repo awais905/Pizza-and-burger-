@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza & Burger - Complete Website</title>
+    <title>Pizza & Burger - Premium Restaurant</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         :root {
@@ -20,12 +20,15 @@
             --dark: #2c3e50;
             --light: #ecf0f1;
             --text: #333333;
+            --gold: #ffd700;
+            --silver: #bdc3c7;
         }
         
         body {
             background-color: #f9f9f9;
             color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -39,11 +42,12 @@
         header {
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
         
         .header-content {
@@ -60,7 +64,8 @@
         }
         
         .logo span:first-child {
-            color: #ffcc00;
+            color: var(--gold);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .logo span:last-child {
@@ -73,20 +78,49 @@
         }
         
         nav ul li {
-            margin-left: 20px;
+            margin-left: 25px;
+            position: relative;
         }
         
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
         }
         
-        nav ul li a:hover, nav ul li a.active {
-            background-color: rgba(255, 255, 255, 0.2);
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        nav ul li a:hover::before {
+            left: 0;
+        }
+        
+        nav ul li a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        nav ul li a.active {
+            background: var(--gold);
+            color: var(--dark);
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         
         .auth-buttons {
@@ -95,73 +129,161 @@
         }
         
         .auth-btn {
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .auth-btn:hover::before {
+            left: 100%;
         }
         
         .auth-btn.login {
-            background: var(--secondary);
-            color: white;
-            border: 2px solid var(--secondary);
+            background: var(--gold);
+            color: var(--dark);
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
         
         .auth-btn.login:hover {
             background: transparent;
-            color: var(--secondary);
+            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .language-selector {
+            position: relative;
+            margin-left: 15px;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1604382355076-af4b0eb60143?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
-            padding: 100px 20px;
-            margin-bottom: 40px;
-            border-radius: 10px;
+            padding: 120px 20px;
+            margin-bottom: 60px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.3) 0%, rgba(243, 156, 18, 0.3) 100%);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease;
         }
         
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
+            font-size: 1.4rem;
+            margin-bottom: 40px;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeInUp 1.2s ease;
         }
         
         .btn {
             display: inline-block;
-            background-color: var(--secondary);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
+            background: linear-gradient(135deg, var(--secondary), var(--gold));
+            color: var(--dark);
+            padding: 16px 35px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.1rem;
-            transition: all 0.3s;
-            margin: 0 10px;
+            transition: all 0.4s ease;
+            margin: 0 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
-            background-color: #e67e22;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
         
         .btn-outline {
             background: transparent;
             border: 2px solid white;
+            color: white;
         }
         
         .btn-outline:hover {
@@ -169,128 +291,209 @@
             color: var(--primary);
         }
         
-        .btn-gold {
-            background: linear-gradient(135deg, #ffd700, #ffcc00);
-            color: var(--dark);
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        }
-        
-        .btn-gold:hover {
-            background: linear-gradient(135deg, #ffcc00, #ffd700);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
-            color: var(--dark);
-        }
-        
         /* Features Section */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
         
         .feature-card {
             background: white;
-            border-radius: 10px;
-            padding: 30px;
+            border-radius: 15px;
+            padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            transition: all 0.5s ease;
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
         }
         
         .feature-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
         .feature-icon {
-            font-size: 50px;
+            font-size: 60px;
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--secondary);
         }
         
         .feature-card h3 {
             color: var(--dark);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover h3 {
+            color: var(--primary);
         }
         
         /* Menu Preview */
         .menu-preview {
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
         
         .section-title {
             text-align: center;
             color: var(--primary);
-            margin-bottom: 40px;
-            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-size: 2.8rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
         
         .menu-items {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
         
         .menu-item {
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
         }
         
         .menu-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
         .menu-item img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .menu-item:hover img {
+            transform: scale(1.1);
         }
         
         .menu-item-content {
-            padding: 20px;
+            padding: 25px;
+            position: relative;
         }
         
         .menu-item h3 {
             color: var(--dark);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 1.4rem;
         }
         
         .menu-item p {
             color: var(--text);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
         
         .price {
             color: var(--primary);
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        .order-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .order-btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
         }
         
         /* CTA Section */
         .cta {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('https://images.unsplash.com/photo-1571091655789-405eb7a3a3a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
-            padding: 80px 20px;
-            border-radius: 10px;
-            margin-bottom: 60px;
+            padding: 100px 20px;
+            border-radius: 15px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.4) 0%, rgba(243, 156, 18, 0.4) 100%);
+            z-index: 0;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .cta h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         }
         
         .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
@@ -298,204 +501,193 @@
         
         /* Footer */
         footer {
-            background-color: var(--dark);
+            background: linear-gradient(135deg, var(--dark), #1a2530);
             color: white;
-            padding: 60px 0 30px;
+            padding: 80px 0 40px;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 50px;
+            margin-bottom: 50px;
         }
         
         .footer-section h3 {
-            color: var(--secondary);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
         }
         
         .footer-section p {
-            margin-bottom: 15px;
-            opacity: 0.8;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            line-height: 1.6;
         }
         
         .footer-section a {
             color: white;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            opacity: 0.9;
         }
         
         .footer-section a:hover {
-            color: var(--secondary);
+            color: var(--gold);
+            transform: translateX(5px);
+            opacity: 1;
         }
         
         .social-icons {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
         
         .social-icons a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            font-size: 20px;
         }
         
         .social-icons a:hover {
             background: var(--primary);
+            transform: translateY(-5px);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
+            opacity: 0.8;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             .header-content {
                 flex-direction: column;
                 text-align: center;
             }
             
             nav ul {
-                margin-top: 15px;
+                margin-top: 20px;
                 justify-content: center;
                 flex-wrap: wrap;
             }
             
             nav ul li {
-                margin: 5px 10px;
+                margin: 8px 12px;
             }
             
             .auth-buttons {
-                margin-top: 15px;
+                margin-top: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 20px;
             }
             
             .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .hero p {
+            .btn {
+                display: block;
+                margin: 15px auto;
+                width: 80%;
+                max-width: 250px;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+            
+            .cta p {
                 font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 24px;
+            }
+            
+            nav ul li a {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .auth-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
             }
             
             .section-title {
                 font-size: 2rem;
             }
-        }
-        
-        /* Page Content Styles */
-        .page-content {
-            display: none;
-        }
-        
-        #home-page {
-            display: block;
-        }
-        
-        /* Login Form Popup */
-        .login-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .login-container {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        
-        .close-login {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--gray);
-        }
-        
-        .login-form h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-        
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
-        }
-        
-        .form-footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 14px;
-        }
-        
-        .form-footer a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+            
+            .feature-icon {
+                font-size: 50px;
+            }
         }
     </style>
 </head>
@@ -510,112 +702,66 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#" class="nav-link active" data-page="home-page">Home</a></li>
-                        <li><a href="#" class="nav-link" data-page="menu-page">Menu</a></li>
-                        <li><a href="#" class="nav-link" data-page="about-page">About</a></li>
-                        <li><a href="#" class="nav-link" data-page="contact-page">Contact</a></li>
-                        <li><a href="#" class="nav-link" data-page="order-page">Order Online</a></li>
+                        <li><a href="#" class="active">Home</a></li>
+                        <li><a href="#">Menu</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Order Online</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="#" class="auth-btn login" id="login-btn">Login</a>
+                    <a href="#" class="auth-btn login">Login</a>
+                    <div class="language-selector">
+                        <button class="lang-btn">
+                            <i class="fas fa-globe"></i> EN
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Home Page -->
-    <div id="home-page" class="page-content">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <h1>Best Pizza & Burgers in Town</h1>
-                <p>Experience the delicious taste of our handcrafted pizzas and juicy burgers made with fresh ingredients and served with love.</p>
-                <div>
-                    <a href="#" class="btn nav-link" data-page="menu-page">View Menu</a>
-                    <a href="#" class="btn btn-gold nav-link" data-page="order-page">Order Online</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <div class="container">
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <h3>Fast Delivery</h3>
-                    <p>Get your favorite food delivered to your doorstep in under 30 minutes.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3>Fresh Ingredients</h3>
-                    <p>We use only the freshest ingredients to prepare your meals.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tag"></i>
-                    </div>
-                    <h3>Great Deals</h3>
-                    <p>Enjoy amazing deals and discounts on our delicious menu items.</p>
-                </div>
-            </div>
-
-            <!-- Menu Preview -->
-            <div class="menu-preview">
-                <h2 class="section-title">Our Popular Items</h2>
-                <div class="menu-items">
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza">
-                        <div class="menu-item-content">
-                            <h3>Margherita Pizza</h3>
-                            <p>Classic pizza with tomato sauce, mozzarella, and fresh basil</p>
-                            <span class="price">Rs. 850</span>
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Classic Beef Burger">
-                        <div class="menu-item-content">
-                            <h3>Classic Beef Burger</h3>
-                            <p>Juicy beef patty with lettuce, tomato, and special sauce</p>
-                            <span class="price">Rs. 550</span>
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pepperoni Pizza">
-                        <div class="menu-item-content">
-                            <h3>Pepperoni Pizza</h3>
-                            <p>Spicy pepperoni, mozzarella, and tomato sauce</p>
-                            <span class="price">Rs. 950</span>
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chicken Burger">
-                        <div class="menu-item-content">
-                            <h3>Chicken Burger</h3>
-                            <p>Crispy chicken fillet with mayo and fresh vegetables</p>
-                            <span class="price">Rs. 500</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA Section -->
-            <div class="cta">
-                <h2>Ready to satisfy your cravings?</h2>
-                <p>Order now and get 15% off on your first order with code WELCOME15</p>
-                <a href="#" class="btn btn-gold nav-link" data-page="order-page">Order Now</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Best Pizza & Burgers in Town</h1>
+            <p>Experience the delicious taste of our handcrafted pizzas and juicy burgers made with fresh ingredients and served with love.</p>
+            <div>
+                <a href="#" class="btn">View Menu</a>
+                <a href="#" class="btn btn-outline">Order Online</a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Other Pages (Simplified for demo) -->
-    <div id="menu-page" class="page-content">
-        <div class="container">
-            <h2 class="section-title">Our Menu</h2>
+    <!-- Features Section -->
+    <div class="container">
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3>Fast Delivery</h3>
+                <p>Get your favorite food delivered to your doorstep in under 30 minutes.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Fresh Ingredients</h3>
+                <p>We use only the freshest ingredients to prepare your meals.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tag"></i>
+                </div>
+                <h3>Great Deals</h3>
+                <p>Enjoy amazing deals and discounts on our delicious menu items.</p>
+            </div>
+        </div>
+
+        <!-- Menu Preview -->
+        <div class="menu-preview">
+            <h2 class="section-title">Our Popular Items</h2>
             <div class="menu-items">
                 <div class="menu-item">
                     <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza">
@@ -623,6 +769,7 @@
                         <h3>Margherita Pizza</h3>
                         <p>Classic pizza with tomato sauce, mozzarella, and fresh basil</p>
                         <span class="price">Rs. 850</span>
+                        <a href="#" class="order-btn">Order Now</a>
                     </div>
                 </div>
                 <div class="menu-item">
@@ -631,90 +778,36 @@
                         <h3>Classic Beef Burger</h3>
                         <p>Juicy beef patty with lettuce, tomato, and special sauce</p>
                         <span class="price">Rs. 550</span>
+                        <a href="#" class="order-btn">Order Now</a>
                     </div>
                 </div>
-                <!-- More menu items would go here -->
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#" class="btn btn-gold nav-link" data-page="order-page">Order Now</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="about-page" class="page-content">
-        <div class="container">
-            <h2 class="section-title">About Us</h2>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
-                    At Pizza & Burger, we've been serving the best pizza and burgers in South Punjab since 2010. 
-                    Our passion for quality ingredients and authentic recipes has made us a favorite among locals 
-                    in Shahjmal, Mondka, Shahgarh, Khangarh, and Muzaffargarh.
-                </p>
-                <p style="font-size: 1.2rem; line-height: 1.8;">
-                    We believe that great food brings people together, and we're committed to creating memorable 
-                    dining experiences for our customers. Every pizza and burger is prepared with care and the 
-                    freshest ingredients available.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="contact-page" class="page-content">
-        <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);">
-                <h3 style="color: var(--primary); margin-bottom: 20px;">Get in Touch</h3>
-                <p style="margin-bottom: 15px;"><strong>Phone:</strong> 03080432842</p>
-                <p style="margin-bottom: 15px;"><strong>Email:</strong> awaisaziz8832@gmail.com</p>
-                <p style="margin-bottom: 20px;"><strong>Areas Served:</strong> Shahjmal, Mondka, Shahgarh, Khangarh, Muzaffargarh</p>
-                <p style="margin-bottom: 20px;"><strong>Hours:</strong> Monday-Sunday: 11:00 AM - 11:00 PM</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="order-page" class="page-content">
-        <div class="container">
-            <h2 class="section-title">Order Online</h2>
-            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);">
-                <h3 style="color: var(--primary); margin-bottom: 20px;">Place Your Order</h3>
-                <p style="margin-bottom: 20px;">We accept orders via WhatsApp and phone call. Please contact us at:</p>
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <p style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">03080432842</p>
-                </div>
-                <p style="margin-bottom: 20px;">Payment Methods: JazzCash and EasyPaisa</p>
-                <div style="text-align: center;">
-                    <a href="https://wa.me/923080432842" class="btn" target="_blank" style="background-color: #25D366;">
-                        <i class="fab fa-whatsapp"></i> Order via WhatsApp
-                    </a>
-                    <a href="tel:03080432842" class="btn btn-gold">
-                        <i class="fas fa-phone"></i> Call to Order
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Login Popup -->
-    <div class="login-popup" id="login-popup">
-        <div class="login-container">
-            <span class="close-login" id="close-login">&times;</span>
-            <div class="login-form">
-                <h2>Login to Your Account</h2>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" required>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pepperoni Pizza">
+                    <div class="menu-item-content">
+                        <h3>Pepperoni Pizza</h3>
+                        <p>Spicy pepperoni, mozzarella, and tomato sauce</p>
+                        <span class="price">Rs. 950</span>
+                        <a href="#" class="order-btn">Order Now</a>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" required>
-                    </div>
-                    <button type="submit" class="login-btn">Login</button>
-                </form>
-                <div class="form-footer">
-                    <p>Don't have an account? <a href="#">Sign up</a></p>
-                    <p><a href="#">Forgot password?</a></p>
                 </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chicken Burger">
+                    <div class="menu-item-content">
+                        <h3>Chicken Burger</h3>
+                        <p>Crispy chicken fillet with mayo and fresh vegetables</p>
+                        <span class="price">Rs. 500</span>
+                        <a href="#" class="order-btn">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta">
+            <div class="cta-content">
+                <h2>Ready to satisfy your cravings?</h2>
+                <p>Order now and get 15% off on your first order with code WELCOME15</p>
+                <a href="#" class="btn">Order Now</a>
             </div>
         </div>
     </div>
@@ -729,11 +822,11 @@
                 </div>
                 <div class="footer-section">
                     <h3>Quick Links</h3>
-                    <a href="#" class="nav-link" data-page="home-page">Home</a>
-                    <a href="#" class="nav-link" data-page="menu-page">Menu</a>
-                    <a href="#" class="nav-link" data-page="about-page">About Us</a>
-                    <a href="#" class="nav-link" data-page="contact-page">Contact</a>
-                    <a href="#" class="nav-link" data-page="order-page">Order Online</a>
+                    <a href="#">Home</a>
+                    <a href="#">Menu</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Order Online</a>
                 </div>
                 <div class="footer-section">
                     <h3>Contact Info</h3>
@@ -755,53 +848,37 @@
     </footer>
 
     <script>
-        // Navigation functionality
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const pageId = this.getAttribute('data-page');
-                
-                // Hide all pages
-                document.querySelectorAll('.page-content').forEach(page => {
-                    page.style.display = 'none';
+        // Add animations to elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.feature-card, .menu-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
                 });
-                
-                // Show selected page
-                document.getElementById(pageId).style.display = 'block';
-                
-                // Update active navigation link
-                document.querySelectorAll('.nav-link').forEach(navLink => {
-                    navLink.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                // Scroll to top
-                window.scrollTo(0, 0);
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.6s ease';
+                observer.observe(element);
             });
-        });
-        
-        // Login popup functionality
-        document.getElementById('login-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('login-popup').style.display = 'flex';
-        });
-        
-        document.getElementById('close-login').addEventListener('click', function() {
-            document.getElementById('login-popup').style.display = 'none';
-        });
-        
-        // Close login popup when clicking outside
-        document.getElementById('login-popup').addEventListener('click', function(e) {
-            if (e.target === this) {
-                document.getElementById('login-popup').style.display = 'none';
-            }
-        });
-        
-        // Login form submission
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Login functionality would be implemented here. In a real application, this would connect to a backend service.');
-            document.getElementById('login-popup').style.display = 'none';
+            
+            // Button hover effects
+            const buttons = document.querySelectorAll('a, button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
         });
     </script>
 </body>
