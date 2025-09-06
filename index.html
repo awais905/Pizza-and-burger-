@@ -47,7 +47,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
         }
         
         .header-content {
@@ -193,6 +192,43 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            min-width: 160px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .lang-dropdown a {
+            color: var(--dark);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .lang-dropdown a:last-child {
+            border-bottom: none;
+        }
+        
+        .lang-dropdown a:hover {
+            background: #f9f9f9;
+            padding-left: 25px;
+            color: var(--primary);
+        }
+        
+        .language-selector:hover .lang-dropdown {
+            display: block;
+        }
+        
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1604382355076-af4b0eb60143?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
@@ -224,13 +260,13 @@
             z-index: 1;
             max-width: 800px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease;
         }
         
         .hero h1 {
             font-size: 3.8rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1s ease;
         }
         
         .hero p {
@@ -239,7 +275,6 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeInUp 1.2s ease;
         }
         
         .btn {
@@ -499,6 +534,17 @@
             margin-right: auto;
         }
         
+        /* Page Sections */
+        .page-section {
+            display: none;
+            padding: 40px 0;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        #home-page {
+            display: block;
+        }
+        
         /* Footer */
         footer {
             background: linear-gradient(135deg, var(--dark), #1a2530);
@@ -592,6 +638,15 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
             }
         }
         
@@ -702,184 +757,231 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#" class="active">Home</a></li>
-                        <li><a href="#">Menu</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Order Online</a></li>
+                        <li><a href="#home-page" class="active nav-link" data-page="home-page">Home</a></li>
+                        <li><a href="#menu-page" class="nav-link" data-page="menu-page">Menu</a></li>
+                        <li><a href="#about-page" class="nav-link" data-page="about-page">About</a></li>
+                        <li><a href="#contact-page" class="nav-link" data-page="contact-page">Contact</a></li>
+                        <li><a href="#order-page" class="nav-link" data-page="order-page">Order Online</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="#" class="auth-btn login">Login</a>
+                    <a href="#login" class="auth-btn login" id="login-btn">Login</a>
                     <div class="language-selector">
                         <button class="lang-btn">
                             <i class="fas fa-globe"></i> EN
                         </button>
+                        <div class="lang-dropdown">
+                            <a href="#" onclick="changeLanguage('english')">English</a>
+                            <a href="#" onclick="changeLanguage('urdu')">Urdu</a>
+                            <a href="#" onclick="changeLanguage('saraiki')">Saraiki</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Best Pizza & Burgers in Town</h1>
-            <p>Experience the delicious taste of our handcrafted pizzas and juicy burgers made with fresh ingredients and served with love.</p>
-            <div>
-                <a href="#" class="btn">View Menu</a>
-                <a href="#" class="btn btn-outline">Order Online</a>
+    <!-- Home Page -->
+    <section id="home-page" class="page-section">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Best Pizza & Burgers in Town</h1>
+                <p>Experience the delicious taste of our handcrafted pizzas and juicy burgers made with fresh ingredients and served with love.</p>
+                <div>
+                    <a href="#menu-page" class="btn nav-link" data-page="menu-page">View Menu</a>
+                    <a href="#order-page" class="btn btn-outline nav-link" data-page="order-page">Order Online</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <div class="container">
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Fast Delivery</h3>
+                    <p>Get your favorite food delivered to your doorstep in under 30 minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Fresh Ingredients</h3>
+                    <p>We use only the freshest ingredients to prepare your meals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3>Great Deals</h3>
+                    <p>Enjoy amazing deals and discounts on our delicious menu items.</p>
+                </div>
+            </div>
+
+            <!-- Menu Preview -->
+            <div class="menu-preview">
+                <h2 class="section-title">Our Popular Items</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza">
+                        <div class="menu-item-content">
+                            <h3>Margherita Pizza</h3>
+                            <p>Classic pizza with tomato sauce, mozzarella, and fresh basil</p>
+                            <span class="price">Rs. 850</span>
+                            <a href="#order-page" class="order-btn nav-link" data-page="order-page">Order Now</a>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Classic Beef Burger">
+                        <div class="menu-item-content">
+                            <h3>Classic Beef Burger</h3>
+                            <p>Juicy beef patty with lettuce, tomato, and special sauce</p>
+                            <span class="price">Rs. 550</span>
+                            <a href="#order-page" class="order-btn nav-link" data-page="order-page">Order Now</a>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pepperoni Pizza">
+                        <div class="menu-item-content">
+                            <h3>Pepperoni Pizza</h3>
+                            <p>Spicy pepperoni, mozzarella, and tomato sauce</p>
+                            <span class="price">Rs. 950</span>
+                            <a href="#order-page" class="order-btn nav-link" data-page="order-page">Order Now</a>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chicken Burger">
+                        <div class="menu-item-content">
+                            <h3>Chicken Burger</h3>
+                            <p>Crispy chicken fillet with mayo and fresh vegetables</p>
+                            <span class="price">Rs. 500</span>
+                            <a href="#order-page" class="order-btn nav-link" data-page="order-page">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta">
+                <div class="cta-content">
+                    <h2>Ready to satisfy your cravings?</h2>
+                    <p>Order now and get 15% off on your first order with code WELCOME15</p>
+                    <a href="#order-page" class="btn nav-link" data-page="order-page">Order Now</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <div class="container">
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-truck"></i>
-                </div>
-                <h3>Fast Delivery</h3>
-                <p>Get your favorite food delivered to your doorstep in under 30 minutes.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-utensils"></i>
-                </div>
-                <h3>Fresh Ingredients</h3>
-                <p>We use only the freshest ingredients to prepare your meals.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-tag"></i>
-                </div>
-                <h3>Great Deals</h3>
-                <p>Enjoy amazing deals and discounts on our delicious menu items.</p>
-            </div>
-        </div>
-
-        <!-- Menu Preview -->
-        <div class="menu-preview">
-            <h2 class="section-title">Our Popular Items</h2>
+    <!-- Menu Page -->
+    <section id="menu-page" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Our Full Menu</h2>
             <div class="menu-items">
+                <!-- Pizza Items -->
                 <div class="menu-item">
                     <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza">
                     <div class="menu-item-content">
                         <h3>Margherita Pizza</h3>
                         <p>Classic pizza with tomato sauce, mozzarella, and fresh basil</p>
                         <span class="price">Rs. 850</span>
-                        <a href="#" class="order-btn">Order Now</a>
+                        <a href="#order-page" class="order-btn nav-link" data-page="order-page">Order Now</a>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Classic Beef Burger">
-                    <div class="menu-item-content">
-                        <h3>Classic Beef Burger</h3>
-                        <p>Juicy beef patty with lettuce, tomato, and special sauce</p>
-                        <span class="price">Rs. 550</span>
-                        <a href="#" class="order-btn">Order Now</a>
-                    </div>
-                </div>
+                
                 <div class="menu-item">
                     <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pepperoni Pizza">
                     <div class="menu-item-content">
                         <h3>Pepperoni Pizza</h3>
                         <p>Spicy pepperoni, mozzarella, and tomato sauce</p>
                         <span class="price">Rs. 950</span>
-                        <a href="#" class="order-btn">Order Now</a>
+                        <a href="#order-page" class="order-btn nav-link" data-page="order-page">Order Now</a>
                     </div>
                 </div>
+                
+                <!-- Burger Items -->
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Classic Beef Burger">
+                    <div class="menu-item-content">
+                        <h3>Classic Beef Burger</h3>
+                        <p>Juicy beef patty with lettuce, tomato, and special sauce</p>
+                        <span class="price">Rs. 550</span>
+                        <a href="#order-page" class="order-btn nav-link" data-page="order-page">Order Now</a>
+                    </div>
+                </div>
+                
                 <div class="menu-item">
                     <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chicken Burger">
                     <div class="menu-item-content">
                         <h3>Chicken Burger</h3>
                         <p>Crispy chicken fillet with mayo and fresh vegetables</p>
                         <span class="price">Rs. 500</span>
-                        <a href="#" class="order-btn">Order Now</a>
+                        <a href="#order-page" class="order-btn nav-link" data-page="order-page">Order Now</a>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- CTA Section -->
-        <div class="cta">
-            <div class="cta-content">
-                <h2>Ready to satisfy your cravings?</h2>
-                <p>Order now and get 15% off on your first order with code WELCOME15</p>
-                <a href="#" class="btn">Order Now</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
+    <!-- About Page -->
+    <section id="about-page" class="page-section">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Pizza & Burger</h3>
-                    <p>Serving the best pizza and burgers in South Punjab since 2010. Made with fresh ingredients and local spices.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <a href="#">Home</a>
-                    <a href="#">Menu</a>
-                    <a href="#">About Us</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Order Online</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>Main Market, Shahjmal, Punjab, Pakistan</p>
-                    <p>03080432842</p>
-                    <p>awaisaziz8832@gmail.com</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/923080432842"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Pizza & Burger. All rights reserved.</p>
+            <h2 class="section-title">About Us</h2>
+            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Our Story</h3>
+                <p style="margin-bottom: 20px; line-height: 1.8;">
+                    At Pizza & Burger, we've been serving the best pizza and burgers in South Punjab since 2010. 
+                    Our passion for quality ingredients and authentic recipes has made us a favorite among locals 
+                    in Shahjmal, Mondka, Shahgarh, Khangarh, and Muzaffargarh.
+                </p>
+                <p style="margin-bottom: 20px; line-height: 1.8;">
+                    We believe that great food brings people together, and we're committed to creating memorable 
+                    dining experiences for our customers. Every pizza and burger is prepared with care and the 
+                    freshest ingredients available.
+                </p>
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Our Locations</h3>
+                <p style="margin-bottom: 15px; line-height: 1.8;">
+                    We proudly serve the following areas with our delicious food:
+                </p>
+                <ul style="margin-bottom: 20px; padding-left: 20px; line-height: 1.8;">
+                    <li>Shahjmal</li>
+                    <li>Mondka</li>
+                    <li>Shahgarh</li>
+                    <li>Khangarh</li>
+                    <li>Muzaffargarh</li>
+                </ul>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        // Add animations to elements on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const animatedElements = document.querySelectorAll('.feature-card, .menu-item');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            animatedElements.forEach(element => {
-                element.style.opacity = 0;
-                element.style.transform = 'translateY(30px)';
-                element.style.transition = 'all 0.6s ease';
-                observer.observe(element);
-            });
-            
-            // Button hover effects
-            const buttons = document.querySelectorAll('a, button');
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px)';
-                });
+    <!-- Contact Page -->
+    <section id="contact-page" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Get in Touch</h3>
+                <p style="margin-bottom: 15px;"><strong>Phone:</strong> 03080432842</p>
+                <p style="margin-bottom: 15px;"><strong>Email:</strong> awaisaziz8832@gmail.com</p>
+                <p style="margin-bottom: 20px;"><strong>Areas Served:</strong> Shahjmal, Mondka, Shahgarh, Khangarh, Muzaffargarh</p>
+                <p style="margin-bottom: 20px;"><strong>Hours:</strong> Monday-Sunday: 11:00 AM - 11:00 PM</p>
                 
-                button.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <a href="tel:03080432842" class="order-btn">
+                        <i class="fas fa-phone"></i> Call Now
+                    </a>
+                    <a href="https://wa.me/923080432842" class="order-btn" style="background: #25D366;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Online Page -->
+    <section id="order-page" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Order Online</h2>
+            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
+                <h3 style="color: var(--
