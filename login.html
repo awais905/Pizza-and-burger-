@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Pizza & Burger</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #e74c3c;
+            --secondary: #f39c12;
+            --accent: #c0392b;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --text: #333333;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: var(--text);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* Animation Container */
+        .animation-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        /* Cartoon Character */
+        .cartoon {
+            position: absolute;
+            bottom: 150px;
+            left: -200px;
+            width: 180px;
+            height: 250px;
+            z-index: 10;
+            animation: enter 1.5s forwards ease-in-out;
+            animation-delay: 0.5s;
+        }
+        
+        .cartoon-body {
+            position: absolute;
+            width: 120px;
+            height: 140px;
+            background: #3498db;
+            border-radius: 60px 60px 10px 10px;
+            bottom: 0;
+            left: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cartoon-head {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #ffdbac;
+            border-radius: 50%;
+            bottom: 130px;
+            left: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cartoon-eye {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 35px;
+        }
+        
+        .cartoon-eye.left {
+            left: 25px;
+        }
+        
+        .cartoon-eye.right {
+            right: 25px;
+        }
+        
+        .cartoon-pupil {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #2c3e50;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+        }
+        
+        .cartoon-mouth {
+            position: absolute;
+            width: 40px;
+            height: 10px;
+            background: #e74c3c;
+            border-radius: 10px;
+            bottom: 20px;
+            left: 30px;
+        }
+        
+        .cartoon-arm {
+            position: absolute;
+            width: 25px;
+            height: 80px;
+            background: #3498db;
+            border-radius: 20px;
+            bottom: 50px;
+        }
+        
+        .cartoon-arm.left {
+            left: 10px;
+            transform: rotate(20deg);
+            animation: wave 2s infinite ease-in-out;
+            transform-origin: top center;
+        }
+        
+        .cartoon-arm.right {
+            right: 10px;
+            transform: rotate(-20deg);
+        }
+        
+        .cartoon-leg {
+            position: absolute;
+            width: 25px;
+            height: 60px;
+            background: #2980b9;
+            border-radius: 10px;
+            bottom: -30px;
+        }
+        
+        .cartoon-leg.left {
+            left: 40px;
+        }
+        
+        .cartoon-leg.right {
+            right: 40px;
+        }
+        
+        /* Bag */
+        .bag {
+            position: absolute;
+            width: 120px;
+            height: 140px;
+            background: var(--primary);
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px 20px 10px 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            animation: bagDrop 1s forwards ease-in-out;
+            animation-delay: 2s;
+            opacity: 0;
+        }
+        
+        .bag-handle {
+            position: absolute;
+            width: 60px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 20px;
+            top: -10px;
+            left: 30px;
+        }
+        
+        .bag-content {
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite ease-in-out;
+        }
+        
+        /* Login Form */
+        .login-form {
+            position: absolute;
+            width: 350px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            bottom: -400px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            animation: formRise 1.5s forwards ease-in-out;
+            animation-delay: 3s;
+            text-align: center;
+        }
+        
+        .login-form h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Animations */
+        @keyframes enter {
+            0% { left: -200px; }
+            100% { left: 50px; }
+        }
+        
+        @keyframes wave {
+            0%, 100% { transform: rotate(20deg); }
+            50% { transform: rotate(10deg); }
+        }
+        
+        @keyframes bagDrop {
+            0% { 
+                opacity: 0;
+                bottom: 250px;
+            }
+            30% {
+                opacity: 1;
+            }
+            100% { 
+                opacity: 1;
+                bottom: 150px;
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes formRise {
+            0% { bottom: -400px; }
+            100% { bottom: 50px; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .animation-container {
+                height: 500px;
+            }
+            
+            .cartoon {
+                transform: scale(0.8);
+                left: -220px;
+            }
+            
+            @keyframes enter {
+                0% { left: -220px; }
+                100% { left: 20px; }
+            }
+            
+            .login-form {
+                width: 300px;
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .animation-container {
+                height: 450px;
+            }
+            
+            .cartoon {
+                transform: scale(0.7);
+                left: -240px;
+            }
+            
+            @keyframes enter {
+                0% { left: -240px; }
+                100% { left: 10px; }
+            }
+            
+            .login-form {
+                width: 280px;
+                padding: 15px;
+            }
+            
+            .login-form h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="animation-container">
+            <!-- Cartoon Character -->
+            <div class="cartoon">
+                <div class="cartoon-head">
+                    <div class="cartoon-eye left">
+                        <div class="cartoon-pupil"></div>
+                    </div>
+                    <div class="cartoon-eye right">
+                        <div class="cartoon-pupil"></div>
+                    </div>
+                    <div class="cartoon-mouth"></div>
+                </div>
+                <div class="cartoon-body"></div>
+                <div class="cartoon-arm left"></div>
+                <div class="cartoon-arm right"></div>
+                <div class="cartoon-leg left"></div>
+                <div class="cartoon-leg right"></div>
+            </div>
+            
+            <!-- Bag -->
+            <div class="bag">
+                <div class="bag-handle"></div>
+                <div class="bag-content">
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+            
+            <!-- Login Form -->
+            <div class="login-form">
+                <h2>Welcome to Pizza & Burger</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#">Sign up</a></p>
+                    <p><a href="#">Forgot password?</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if (username && password) {
+                // In a real application, you would verify credentials with a server
+                // For this demo, we'll just show an alert and redirect
+                alert('Login successful! Welcome to Pizza & Burger.');
+                window.location.href = 'index.html'; // Redirect to homepage
+            } else {
+                alert('Please enter both username and password.');
+            }
+        });
+        
+        // Add some interactive effects
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.style.transform = 'scale(1.02)';
+                input.parentElement.style.transition = 'transform 0.3s';
+            });
+            
+            input.addEventListener('blur', () => {
+                input.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
